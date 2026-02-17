@@ -3,10 +3,8 @@ import { Link, useLocation } from "react-router-dom";
 
 const navLinks = [
   { path: "/", label: "Home" },
-  { path: "/about", label: "About" },
-  { path: "/courses", label: "Courses" },
-  { path: "/events", label: "Events" },
   { path: "/conference", label: "Conference" },
+  { path: "/about", label: "About AITM" },
   { path: "/contact", label: "Contact" },
 ];
 

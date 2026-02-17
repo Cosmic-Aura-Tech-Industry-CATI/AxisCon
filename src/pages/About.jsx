@@ -11,34 +11,33 @@ const recognitionLogos = [
 ];
 
 const milestones = [
-  { year: "2013", event: "Axis Colleges established with first campus" },
-  { year: "2015", event: "Introduced Engineering & Pharmacy programs" },
-  { year: "2018", event: "Expanded to 3 campuses with 5,000+ students" },
-  { year: "2020", event: "Launched online learning platform during pandemic" },
-  { year: "2022", event: "Achieved 85% placement rate with top companies" },
-  { year: "2024", event: "12,000+ students across 20+ programs" },
+  { year: "AICTE", event: "Approved by AICTE New Delhi" },
+  { year: "AKTU", event: "Affiliated to AKTU" },
+  { year: "BTEUP", event: "Affiliated to BTEUP Lucknow" },
+  { year: "AKTU Code", event: "719" },
+  { year: "BTEUP Code", event: "3342" },
 ];
 
 const values = [
   {
-    icon: "🎯",
-    title: "Excellence",
-    description: "Committed to delivering world-class education and maintaining the highest academic standards."
+    icon: "🧠",
+    title: "Learner-Centric",
+    description: "A technology-based approach that enhances learning and performance capabilities."
+  },
+  {
+    icon: "⚙️",
+    title: "Result-Oriented",
+    description: "Focused on measurable outcomes and real-world readiness."
+  },
+  {
+    icon: "🌟",
+    title: "Holistic Growth",
+    description: "Grooming students to become excellent professionals and good human beings."
   },
   {
     icon: "🤝",
-    title: "Integrity",
-    description: "Building a culture of trust, transparency, and ethical practices in all our endeavors."
-  },
-  {
-    icon: "💡",
-    title: "Innovation",
-    description: "Encouraging creative thinking and cutting-edge research to solve real-world problems."
-  },
-  {
-    icon: "🌍",
-    title: "Community",
-    description: "Fostering a diverse, inclusive environment where everyone can thrive and contribute."
+    title: "Nation Building",
+    description: "Preparing youth to become torchbearers of their respective domains."
   },
 ];
 
@@ -46,12 +45,10 @@ export default function About() {
   return (
     <div className="page">
       <div className="page__header">
-        <p className="eyebrow">About Us</p>
-        <h1>Building Tomorrow's Leaders</h1>
+        <p className="eyebrow">About AITM</p>
+        <h1>Axis Institute of Technology and Management</h1>
         <p>
-          Axis Colleges is a premier educational institution dedicated to
-          providing quality education across engineering, medical, and
-          professional disciplines since 2013.
+          Approved by AICTE New Delhi, affiliated to AKTU and BTEUP Lucknow.
         </p>
       </div>
 
@@ -59,18 +56,17 @@ export default function About() {
         <div className="container">
           <div className="spotlight__card spotlight__card--mission">
             <div className="spotlight__content">
-              <p className="eyebrow">Our Mission</p>
-              <h2>Empowering Minds, Shaping Futures</h2>
+              <p className="eyebrow">Our Purpose</p>
+              <h2>Technology for Practical Impact</h2>
               <p>
-                At Axis Colleges, we strive to create an ecosystem where
-                academic excellence meets practical innovation. Our mission is
-                to nurture young minds, equip them with cutting-edge skills,
-                and prepare them to become leaders in their chosen fields.
+                "Technology means the systematic application of scientific or
+                other organized knowledge to practical tasks." This is what we
+                seek at Axis Institute of Technology and Management.
               </p>
               <p style={{ marginTop: "var(--spacing-sm)" }}>
-                We believe in holistic development that goes beyond textbooks -
-                fostering critical thinking, ethical values, and a spirit of
-                entrepreneurship in every student who walks through our doors.
+                At Axis Colleges, we follow a technology-based, learner-centric,
+                and result-oriented approach that enhances students' learning
+                and performance capabilities.
               </p>
             </div>
             <div className="spotlight__image">
@@ -105,7 +101,7 @@ export default function About() {
       <section className="section">
         <div className="section__heading">
           <p className="eyebrow">Our Journey</p>
-          <h2>Milestones & Achievements</h2>
+          <h2>Approvals & Affiliations</h2>
         </div>
         <div className="schedule-timeline" style={{ maxWidth: "800px" }}>
           {milestones.map((milestone) => (
@@ -122,8 +118,8 @@ export default function About() {
           <p className="eyebrow">Our Values</p>
           <h2>What We Stand For</h2>
           <p className="section__subtitle">
-            Our core values guide everything we do, from curriculum design to
-            campus culture.
+            Axis Colleges is passionate about grooming the nation's youth to
+            grow into excellent professionals and good human beings.
           </p>
         </div>
         <div className="topics-grid">
@@ -140,19 +136,12 @@ export default function About() {
       <section className="section spotlight">
         <div className="spotlight__card">
           <div className="spotlight__content">
-            <p className="eyebrow">Leadership</p>
-            <h2>Mr. Raj Kushwaha</h2>
-            <p className="spotlight__subtitle">Chairman, Axis Group</p>
+            <p className="eyebrow">About AITM</p>
+            <h2>Axis Colleges</h2>
             <p>
-              With over two decades of experience in education and institution
-              building, Mr. Raj Kushwaha has been the driving force behind Axis
-              Colleges' growth and success. His vision of creating accessible,
-              quality education has transformed thousands of lives.
-            </p>
-            <p style={{ marginTop: "var(--spacing-sm)" }}>
-              Under his leadership, Axis Colleges has grown from a single
-              campus to a multi-disciplinary institution serving over 12,000
-              students across various programs.
+              We are committed to a learner-centric, result-oriented environment
+              that supports academic excellence, innovation, and real-world
+              readiness.
             </p>
           </div>
           <div className="spotlight__image">
@@ -163,17 +152,17 @@ export default function About() {
 
       <section className="cta">
         <div className="cta__content">
-          <h2>Ready to Join the Axis Family?</h2>
+          <h2>Learn More About ICCIST 2026</h2>
           <p>
-            Explore our programs and discover how Axis Colleges can help you
-            achieve your academic and career goals.
+            Stay informed about conference updates, important dates, and
+            registration details.
           </p>
           <div style={{ display: "flex", gap: "var(--spacing-sm)", justifyContent: "center", flexWrap: "wrap" }}>
-            <Link className="btn btn--primary" to="/courses">
-              Explore Courses
+            <Link className="btn btn--primary" to="/conference">
+              Visit Conference Page
             </Link>
             <Link className="btn btn--secondary" to="/contact">
-              Contact Admissions
+              Contact Us
             </Link>
           </div>
         </div>

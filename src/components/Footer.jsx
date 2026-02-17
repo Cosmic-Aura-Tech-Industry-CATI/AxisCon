@@ -25,8 +25,8 @@ export default function Footer() {
   return (
     <footer className="footer">
       <div>
-        <h2>Axis Colleges</h2>
-        <p>Building a future-ready learning ecosystem since 2013.</p>
+        <h2>ICCIST 2026</h2>
+        <p>International Conference on Computer Science, IT, and Intelligent Systems.</p>
       </div>
       <div className="footer__links">
         {socialLinks.map((link) => (
@@ -42,7 +42,7 @@ export default function Footer() {
         ))}
       </div>
       <p className="footer__copy">
-        Copyright © 2024 Axis Colleges. All rights reserved.
+        Copyright © 2026 ICCIST. All rights reserved.
       </p>
     </footer>
   );

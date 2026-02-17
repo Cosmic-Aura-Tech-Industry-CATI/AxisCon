@@ -10,76 +10,52 @@ const recognitionLogos = [
   "/assets/recognition/pci.webp",
 ];
 
-const featuredCourses = [
+const focusAreas = [
   {
-    title: "B-Tech",
-    subtitle: "Engineering Program",
+    title: "Artificial Intelligence",
+    subtitle: "Intelligent systems and real-world applications",
     image: "/assets/courses/btech.jpg",
   },
   {
-    title: "MBA",
-    subtitle: "Business Administration",
+    title: "Machine Learning",
+    subtitle: "Data-driven models and predictive insights",
+    image: "/assets/courses/mca.webp",
+  },
+  {
+    title: "Data Science",
+    subtitle: "Analytics, visualization, and decision support",
     image: "/assets/courses/mba.jpg",
   },
   {
-    title: "B-Pharma",
-    subtitle: "Pharmacy Program",
+    title: "Information Technology",
+    subtitle: "Systems, security, and digital transformation",
     image: "/assets/courses/bpharma.jpg",
   },
-  {
-    title: "MCA",
-    subtitle: "Master Degree Program",
-    image: "/assets/courses/mca.webp",
-  },
 ];
 
-const facilities = [
-  {
-    title: "Libraries",
-    description:
-      "The knowledge resource center curates, safeguards, and circulates the most recent academic materials.",
-    image: "/assets/facilities/library.jpg",
-  },
-  {
-    title: "Laboratories",
-    description:
-      "Hands-on workshops and labs staffed by experts to turn theory into immersive, practical learning.",
-    image: "/assets/facilities/labs.jpg",
-  },
-  {
-    title: "Cafeteria & Canteen",
-    description:
-      "Nutritious, wholesome menus designed for a campus culture that values healthy minds and bodies.",
-    image: "/assets/facilities/canteen.jpg",
-  },
+const importantDates = [
+  { date: "25-February-2026", label: "Paper submissions open" },
+  { date: "25-March-2026", label: "Last date for submission" },
+  { date: "As per submission", label: "Notification of acceptance" },
+  { date: "01-April-2026", label: "Registration deadline" },
+  { date: "02-April-2026", label: "Final camera-ready submission" },
+  { date: "04-05 April-2026", label: "Conference dates" },
 ];
 
-const testimonials = [
+const committee = [
   {
-    name: "Divyanshi Singh",
-    rating: 4,
-    image: "/assets/people/student-1.png",
-    quote:
-      "I'm a B Pharm 3rd year student at Axis Colleges. We have opportunities to participate in health camps, hospital visits, and more.",
+    title: "Organizing Committee",
+    description: "Yet to announce",
   },
   {
-    name: "Amit Mishra",
-    rating: 4.5,
-    image: "/assets/people/student-2.png",
-    quote:
-      "Axis Colleges gives the freedom to choose exciting projects and collaborate with inspiring faculty and peers.",
+    title: "National Advisory Committee",
+    description: "Yet to announce",
+  },
+  {
+    title: "International Advisory Committee",
+    description: "Yet to announce",
   },
 ];
-
-const starArray = (rating) => {
-  const full = Math.floor(rating);
-  const half = rating % 1 !== 0;
-  return Array.from({ length: 5 }, (_, index) => {
-    if (index < full) return "full";
-    if (index === full && half) return "half";
-    return "empty";
-  });
-};
 
 export default function Home() {
   return (
@@ -87,36 +63,38 @@ export default function Home() {
       <header className="hero">
         <div className="hero__content">
           <div className="hero__text">
-            <p className="hero__tag">Future-Ready Campus</p>
+            <p className="hero__tag">ICCIST 2026</p>
             <h1>
-              Axis Colleges <span>Igniting Ideas, Engineering Futures.</span>
+              International Conference on Computer Science,
+              <span> Information Technology, and Intelligent Systems</span>
             </h1>
             <p className="hero__lead">
-              A chain of engineering, medical, and professional colleges where
-              young minds collaborate, research, and shape the next wave of
-              innovation.
+              It is our great pleasure to welcome researchers, faculty members,
+              industry experts, and students to exchange knowledge, present
+              research findings, and discuss future challenges in AI, ML, Data
+              Science, and Information Technology.
             </p>
             <div className="hero__actions">
-              <Link className="btn btn--primary" to="/courses">
-                Explore Programs
+              <Link className="btn btn--primary" to="/conference">
+                View Conference
               </Link>
-              <Link className="btn btn--secondary" to="/contact">
-                Schedule a Visit
+              <Link className="btn btn--secondary" to="/conference">
+                Important Dates
               </Link>
             </div>
           </div>
           <div className="hero__panel">
             <div className="hero__stat">
-              <p className="hero__stat-value">20+</p>
-              <p className="hero__stat-label">Programs Across Disciplines</p>
+              <p className="hero__stat-value">AI</p>
+              <p className="hero__stat-label">Intelligent Systems</p>
             </div>
             <div className="hero__stat">
-              <p className="hero__stat-value">12k</p>
-              <p className="hero__stat-label">Active Students</p>
+              <p className="hero__stat-value">ML</p>
+              <p className="hero__stat-label">Data-Driven Innovation</p>
             </div>
             <div className="hero__stat">
-              <p className="hero__stat-value">85%</p>
-              <p className="hero__stat-label">Placement Success</p>
+              <p className="hero__stat-value">IT</p>
+              <p className="hero__stat-label">Digital Transformation</p>
             </div>
           </div>
         </div>
@@ -138,25 +116,23 @@ export default function Home() {
 
       <section className="section">
         <div className="section__heading">
-          <p className="eyebrow">Programs</p>
-          <h2>Featured Courses</h2>
+          <p className="eyebrow">Conference Focus</p>
+          <h2>Key Research Areas</h2>
           <p className="section__subtitle">
-            Curated pathways for engineering, design, management, and life
-            sciences.
+            The conference emphasizes intelligent computing techniques, smart
+            systems, and emerging technologies that drive automation and
+            sustainable development.
           </p>
         </div>
         <div className="courses__grid">
-          {featuredCourses.map((course) => (
-            <article key={course.title} className="course-card">
+          {focusAreas.map((area) => (
+            <article key={area.title} className="course-card">
               <div className="course-card__image">
-                <img src={course.image} alt={course.title} loading="lazy" />
+                <img src={area.image} alt={area.title} loading="lazy" />
               </div>
               <div className="course-card__body">
-                <h3>{course.title}</h3>
-                <p>{course.subtitle}</p>
-                <Link className="course-card__link" to="/courses">
-                  View All Programs
-                </Link>
+                <h3>{area.title}</h3>
+                <p>{area.subtitle}</p>
               </div>
             </article>
           ))}
@@ -167,14 +143,17 @@ export default function Home() {
         <div className="spotlight__card">
           <div className="spotlight__content">
             <p className="eyebrow">Leadership</p>
-            <h2>Mr. Raj Kushwaha</h2>
-            <p className="spotlight__subtitle">Chairman, Axis Group</p>
+            <h2>Axis Institute of Technology and Management</h2>
+            <p className="spotlight__subtitle">
+              Approved by AICTE New Delhi, affiliated to AKTU and BTEUP Lucknow
+            </p>
             <p>
-              Guiding a culture of academic rigor, entrepreneurial spirit, and
-              community-first innovation across every campus.
+              At Axis Colleges, we follow a technology-based, learner-centric,
+              and result-oriented approach that enhances students' learning and
+              performance capabilities.
             </p>
             <Link className="btn btn--ghost" to="/about">
-              Meet the Leadership
+              Learn About AITM
             </Link>
           </div>
           <div className="spotlight__image">
@@ -183,74 +162,53 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section facilities">
+      <section className="section">
         <div className="section__heading">
-          <p className="eyebrow">Facilities</p>
-          <h2>Designed For Discovery</h2>
+          <p className="eyebrow">Program Schedule</p>
+          <h2>Important Dates</h2>
           <p className="section__subtitle">
-            Inspiring spaces, advanced infrastructure, and student-first
-            amenities.
+            Plan your submissions and participation for ICCIST 2026.
           </p>
         </div>
-        <div className="facilities__grid">
-          {facilities.map((facility) => (
-            <article key={facility.title} className="facility-card">
-              <img src={facility.image} alt={facility.title} loading="lazy" />
-              <div>
-                <h3>{facility.title}</h3>
-                <p>{facility.description}</p>
-              </div>
-            </article>
+        <div className="schedule-timeline" style={{ maxWidth: "860px" }}>
+          {importantDates.map((item) => (
+            <div key={item.label} className="schedule-item">
+              <div className="schedule-time">{item.date}</div>
+              <p className="schedule-description">{item.label}</p>
+            </div>
           ))}
         </div>
       </section>
 
-      <section className="section testimonials">
+      <section className="section events">
         <div className="section__heading">
-          <p className="eyebrow">Testimonials</p>
-          <h2>What Our Students Say</h2>
+          <p className="eyebrow">Committee</p>
+          <h2>Conference Committees</h2>
+          <p className="section__subtitle">
+            Committee details will be announced soon.
+          </p>
         </div>
-        <div className="testimonials__grid">
-          {testimonials.map((testimonial) => (
-            <article key={testimonial.name} className="testimonial-card">
-              <img src={testimonial.image} alt={testimonial.name} loading="lazy" />
-              <div>
-                <div className="testimonial-card__stars">
-                  {starArray(testimonial.rating).map((star, index) => (
-                    <span key={`${testimonial.name}-${index}`}>
-                      {star === "full" && "★"}
-                      {star === "half" && "⯪"}
-                      {star === "empty" && "☆"}
-                    </span>
-                  ))}
-                </div>
-                <h3>{testimonial.name}</h3>
-                <p>{testimonial.quote}</p>
-              </div>
-            </article>
+        <div className="topics-grid">
+          {committee.map((item) => (
+            <div key={item.title} className="topic-card">
+              <div className="topic-icon">📌</div>
+              <h3>{item.title}</h3>
+              <p>{item.description}</p>
+            </div>
           ))}
         </div>
-        <a
-          className="btn btn--ghost"
-          href="https://www.google.com/maps/place/Axis+Colleges/@26.3448626,80.4505286,17z/data=!4m8!3m7!1s0x399c4278f92f3a69:0xb7805a7e15877959!8m2!3d26.3448578!4d80.4527173!9m1!1b1!16s%2Fg%2F1hc0zq865?entry=ttu"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{ marginTop: "var(--spacing-md)", display: "inline-flex" }}
-        >
-          View All Reviews
-        </a>
       </section>
 
       <section className="cta">
         <div className="cta__content">
-          <h2>Enroll For Our Various Courses</h2>
+          <h2>Registration - ICCIST 2026</h2>
           <p>
-            Connect with admissions to explore the right program, scholarships,
-            and campus life.
+            Conference registration payment can be done through online gateway,
+            NEFT, net banking, or bank deposit.
           </p>
-          <a className="btn btn--primary" href="mailto:info@axiscolleges.org">
-            Contact Us
-          </a>
+          <Link className="btn btn--primary" to="/conference">
+            See Registration Details
+          </Link>
         </div>
       </section>
     </>
