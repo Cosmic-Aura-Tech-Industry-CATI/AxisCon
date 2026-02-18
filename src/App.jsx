@@ -7,6 +7,7 @@ import Courses from "./pages/Courses";
 import Events from "./pages/Events";
 import Conference from "./pages/Conference";
 import Contact from "./pages/Contact";
+import Register from "./pages/Register";
 
 export default function App() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
           <Route path="/events" element={<Events />} />
           <Route path="/conference" element={<Conference />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
         <Footer />
       </div>

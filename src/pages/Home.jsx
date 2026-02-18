@@ -100,19 +100,7 @@ export default function Home() {
         </div>
       </header>
 
-      <section className="section recognition">
-        <div className="section__heading">
-          <p className="eyebrow">Accreditation</p>
-          <h2>Approved & Recognized By</h2>
-        </div>
-        <div className="recognition__logos">
-          {recognitionLogos.map((logo) => (
-            <div key={logo} className="recognition__card">
-              <img src={logo} alt="Recognition logo" loading="lazy" />
-            </div>
-          ))}
-        </div>
-      </section>
+      
 
       <section className="section">
         <div className="section__heading">
@@ -139,28 +127,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section spotlight">
-        <div className="spotlight__card">
-          <div className="spotlight__content">
-            <p className="eyebrow">Leadership</p>
-            <h2>Axis Institute of Technology and Management</h2>
-            <p className="spotlight__subtitle">
-              Approved by AICTE New Delhi, affiliated to AKTU and BTEUP Lucknow
-            </p>
-            <p>
-              At Axis Colleges, we follow a technology-based, learner-centric,
-              and result-oriented approach that enhances students' learning and
-              performance capabilities.
-            </p>
-            <Link className="btn btn--ghost" to="/about">
-              Learn About AITM
-            </Link>
-          </div>
-          <div className="spotlight__image">
-            <img src="/assets/people/rajsir.webp" alt="Chairman" loading="lazy" />
-          </div>
-        </div>
-      </section>
+      
 
       <section className="section">
         <div className="section__heading">

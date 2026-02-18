@@ -80,38 +80,9 @@ export default function About() {
         </div>
       </section>
 
-      <section className="section recognition">
-        <div className="section__heading">
-          <p className="eyebrow">Accreditation</p>
-          <h2>Approved & Recognized By</h2>
-          <p className="section__subtitle">
-            Our programs are accredited by leading national bodies, ensuring
-            quality education that meets global standards.
-          </p>
-        </div>
-        <div className="recognition__logos">
-          {recognitionLogos.map((logo) => (
-            <div key={logo.name} className="recognition__card">
-              <img src={logo.src} alt={logo.name} loading="lazy" />
-            </div>
-          ))}
-        </div>
-      </section>
+      
 
-      <section className="section">
-        <div className="section__heading">
-          <p className="eyebrow">Our Journey</p>
-          <h2>Approvals & Affiliations</h2>
-        </div>
-        <div className="schedule-timeline" style={{ maxWidth: "800px" }}>
-          {milestones.map((milestone) => (
-            <div key={milestone.year} className="schedule-item">
-              <div className="schedule-time">{milestone.year}</div>
-              <p className="schedule-description">{milestone.event}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+      
 
       <section className="section facilities">
         <div className="section__heading">
@@ -133,22 +104,7 @@ export default function About() {
         </div>
       </section>
 
-      <section className="section spotlight">
-        <div className="spotlight__card">
-          <div className="spotlight__content">
-            <p className="eyebrow">About AITM</p>
-            <h2>Axis Colleges</h2>
-            <p>
-              We are committed to a learner-centric, result-oriented environment
-              that supports academic excellence, innovation, and real-world
-              readiness.
-            </p>
-          </div>
-          <div className="spotlight__image">
-            <img src="/assets/people/rajsir.webp" alt="Chairman" loading="lazy" />
-          </div>
-        </div>
-      </section>
+      
 
       <section className="cta">
         <div className="cta__content">
