@@ -10,6 +10,8 @@ import Contact from "./pages/Contact";
 import Register from "./pages/Register";
 import SubmitPaper from "./pages/SubmitPaper";
 import Schedule from "./pages/Schedule";
+import Committee from "./pages/Committee";
+import Theme from "./pages/Theme";
 
 export default function App() {
   return (
@@ -26,6 +28,8 @@ export default function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/submit-paper" element={<SubmitPaper />} />
           <Route path="/schedule" element={<Schedule />} />
+          <Route path="/committee" element={<Committee />} />
+          <Route path="/theme" element={<Theme />} />
         </Routes>
         <Footer />
       </div>
