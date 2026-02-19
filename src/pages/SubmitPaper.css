@@ -78,7 +78,7 @@
 }
 
 .submit-hero__title {
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-size: clamp(1.5rem, 5vw, 3rem);
   font-family: "Unbounded", sans-serif;
   line-height: 1.2;
   margin-bottom: 20px;

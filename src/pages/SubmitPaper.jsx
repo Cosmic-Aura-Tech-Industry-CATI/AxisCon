@@ -282,7 +282,7 @@ const SubmitPaper = () => {
         <div className="submit-hero__content">
           <span className="submit-hero__eyebrow">ICCIST 2026</span>
           <h1 className="submit-hero__title">
-            Submit Your <span>Research Paper</span>
+            Submit Your Research Paper
           </h1>
           <p className="submit-hero__description">
             Share your innovative research with the global academic community

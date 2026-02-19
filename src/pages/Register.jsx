@@ -720,8 +720,8 @@ const Register = () => {
           <div className="info-card">
             <div className="info-icon">📍</div>
             <h3>Venue</h3>
-            <p>Axis Convention Center</p>
-            <p className="info-sub">123 Conference Blvd, Tech City</p>
+            <p>Axis Colleges</p>
+            <p className="info-sub">Hathipur Rooma, Kanpur</p>
           </div>
 
           <div className="info-card">
