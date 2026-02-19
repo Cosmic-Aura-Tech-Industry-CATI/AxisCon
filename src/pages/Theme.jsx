@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import "./theme.css";
+import "./Theme.css";
 
 const themes = [
   {
