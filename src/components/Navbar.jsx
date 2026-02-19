@@ -99,9 +99,9 @@ export default function Navbar() {
                     <a href="#download-paper" className="nav__dropdown-item" onClick={closeMenu}>
                       Download Research Paper Format
                     </a>
-                    <a href="#submit-paper" className="nav__dropdown-item" onClick={closeMenu}>
+                    <Link to="/submit-paper" className="nav__dropdown-item" onClick={closeMenu}>
                       Submit Research Paper
-                    </a>
+                    </Link>
                   </div>
                 </div>
               ) : (
