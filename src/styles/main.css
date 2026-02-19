@@ -973,7 +973,6 @@ h1, h2, h3, h4, h5, h6 {
 /* Page Container */
 .page {
   min-height: calc(100vh - 200px);
-  padding-top: var(--spacing-2xl);
 }
 
 .page__header {
@@ -1010,7 +1009,7 @@ h1, h2, h3, h4, h5, h6 {
   background: url("/assets/brand/hero-bg.png");
   background-size: cover;
   background-position: center;
-  filter: blur(8px);
+  opacity: 0.3;
   z-index: -2;
 }
 

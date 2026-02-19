@@ -8,6 +8,7 @@ import Events from "./pages/Events";
 import Conference from "./pages/Conference";
 import Contact from "./pages/Contact";
 import Register from "./pages/Register";
+import Schedule from "./pages/Schedule";
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
           <Route path="/conference" element={<Conference />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/schedule" element={<Schedule />} />
         </Routes>
         <Footer />
       </div>
