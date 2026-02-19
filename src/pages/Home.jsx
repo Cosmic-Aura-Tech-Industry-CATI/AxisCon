@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
+import Seo from "../components/Seo";
 
 const recognitionLogos = [
   "/assets/recognition/aicte.webp",
@@ -65,6 +66,28 @@ export default function Home() {
 
   return (
     <>
+      <Seo
+        title="ICCIST 2026 Conference"
+        description="Official ICCIST 2026 website by Axis Colleges for conference details, important dates, themes, committee updates, and registration."
+        path="/"
+        keywords={[
+          "ICCIST 2026 official website",
+          "Axis Colleges conference",
+          "computational intelligence conference",
+          "smart technologies conference India",
+          "conference registration 2026"
+        ]}
+        faqs={[
+          {
+            question: "When is ICCIST 2026 taking place?",
+            answer: "ICCIST 2026 is scheduled for 4th and 5th April 2026."
+          },
+          {
+            question: "Who can participate in ICCIST 2026?",
+            answer: "Researchers, faculty, students, and industry professionals can participate in ICCIST 2026."
+          }
+        ]}
+      />
       <header className="hero">
         <div className="hero__content">
           <div className="hero__text">

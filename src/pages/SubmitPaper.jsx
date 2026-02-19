@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Seo from "../components/Seo";
 import './SubmitPaper.css';
 
 const conferenceTrackOptions = [
@@ -22,6 +23,10 @@ const participationModes = ['Online', 'Offline'];
 const designations = ['Student', 'Faculty', 'Industry Professional', 'Researcher'];
 
 const SubmitPaper = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const [formData, setFormData] = useState({
     paperTitle: '',
     abstract: '',
@@ -249,6 +254,29 @@ const SubmitPaper = () => {
 
   return (
     <div className="submit-paper-page">
+      <Seo
+        title="Submit Research Paper"
+        description="Submit your research paper to ICCIST 2026 with author details, abstract, document upload, and declarations."
+        path="/submit-paper"
+        type="article"
+        keywords={[
+          "submit research paper",
+          "ICCIST paper submission",
+          "conference paper format",
+          "academic paper upload",
+          "IEEE conference template"
+        ]}
+        faqs={[
+          {
+            question: "What files are required for paper submission?",
+            answer: "You need full paper PDF and copyright form, while plagiarism report and payment screenshot are optional as per process updates."
+          },
+          {
+            question: "Can multiple authors be added in one submission?",
+            answer: "Yes, the submission form supports adding multiple authors and selecting a corresponding author."
+          }
+        ]}
+      />
       {/* Hero Section */}
       <section className="submit-hero">
         <div className="submit-hero__content">

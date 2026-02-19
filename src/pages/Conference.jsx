@@ -17,6 +17,7 @@ const downloads = [
 ];
 
 import { useEffect } from "react";
+import Seo from "../components/Seo";
 
 export default function Conference() {
   useEffect(() => {
@@ -25,6 +26,57 @@ export default function Conference() {
 
   return (
     <div className="page">
+      <Seo
+        title="Conference Details"
+        description="Explore ICCIST 2026 conference themes, key dates, downloads, and participation opportunities in AI, ML, data science, and IT."
+        path="/conference"
+        type="event"
+        keywords={[
+          "ICCIST 2026 conference details",
+          "AI ML conference schedule",
+          "international conference India 2026",
+          "computer science paper presentation",
+          "conference important dates"
+        ]}
+        structuredData={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Event",
+            name: "ICCIST 2026",
+            eventAttendanceMode: "https://schema.org/MixedEventAttendanceMode",
+            eventStatus: "https://schema.org/EventScheduled",
+            startDate: "2026-04-04",
+            endDate: "2026-04-05",
+            description: "International Conference on Computational Intelligence and Smart Technologies hosted by Axis Colleges.",
+            organizer: {
+              "@type": "Organization",
+              name: "Axis Colleges",
+              url: "https://axiscolleges.org"
+            },
+            location: {
+              "@type": "Place",
+              name: "Axis Colleges",
+              address: {
+                "@type": "PostalAddress",
+                addressLocality: "Kanpur",
+                addressRegion: "Uttar Pradesh",
+                addressCountry: "IN"
+              }
+            },
+            url: "https://axiscolleges.org/conference"
+          }
+        ]}
+        faqs={[
+          {
+            question: "What is ICCIST 2026 focused on?",
+            answer: "ICCIST 2026 focuses on computational intelligence, smart technologies, AI, machine learning, data science, and information technology."
+          },
+          {
+            question: "Can students submit papers to ICCIST 2026?",
+            answer: "Yes, students and researchers can submit papers through the submit paper section before the deadline."
+          }
+        ]}
+      />
       <div className="conference-hero">
         <div className="conference-info">
           <p className="eyebrow">ICCIST 2026</p>

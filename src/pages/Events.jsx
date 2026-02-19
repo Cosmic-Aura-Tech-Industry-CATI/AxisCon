@@ -1,4 +1,5 @@
 import { useEffect, useMemo } from "react";
+import Seo from "../components/Seo";
 
 const events = [
   {
@@ -91,6 +92,18 @@ export default function Events() {
 
   return (
     <div className="page">
+      <Seo
+        title="Campus Events and Activities"
+        description="Browse major events, workshops, hackathons, cultural activities, and upcoming programs at Axis Colleges."
+        path="/events"
+        keywords={[
+          "Axis Colleges events",
+          "campus activities",
+          "hackathon events",
+          "workshops and seminars",
+          "student life"
+        ]}
+      />
       <div className="page__header">
         <p className="eyebrow">Campus Life</p>
         <h1>Events & Activities</h1>

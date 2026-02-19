@@ -17,6 +17,7 @@ const contactInfo = [
 ];
 
 import { useEffect } from "react";
+import Seo from "../components/Seo";
 
 export default function Contact() {
   useEffect(() => {
@@ -25,6 +26,18 @@ export default function Contact() {
 
   return (
     <div className="page">
+      <Seo
+        title="Contact ICCIST 2026"
+        description="Contact and communication details for ICCIST 2026 updates, announcements, and official information from Axis Colleges."
+        path="/contact"
+        keywords={[
+          "ICCIST contact",
+          "Axis Colleges contact",
+          "conference enquiry",
+          "conference updates",
+          "ICCIST help"
+        ]}
+      />
       <div className="page__header">
         <p className="eyebrow">Contact Us</p>
         <h1>ICCIST 2026</h1>

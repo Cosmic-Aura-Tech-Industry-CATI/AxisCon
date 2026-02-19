@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import Seo from "../components/Seo";
 import "./Committee.css";
 
 const organizingCommittee = [
@@ -266,6 +267,18 @@ export default function Committee() {
 
   return (
     <div className="committee-page">
+      <Seo
+        title="Conference Committee"
+        description="Meet ICCIST 2026 organizing, advisory, and technical committee members from academia and industry."
+        path="/committee"
+        keywords={[
+          "ICCIST committee",
+          "organizing committee",
+          "advisory board",
+          "technical review committee",
+          "conference leadership"
+        ]}
+      />
       {/* Hero Section */}
       <section className="committee-hero">
         <div className="committee-hero__content">

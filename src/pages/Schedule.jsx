@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import Seo from "../components/Seo";
 import "./Schedule.css";
 
 const conferenceDays = [
@@ -146,6 +147,19 @@ export default function Schedule() {
 
   return (
     <div className="schedule-page">
+      <Seo
+        title="Conference Schedule"
+        description="View ICCIST 2026 day-wise schedule including technical sessions, keynotes, workshops, presentations, and networking events."
+        path="/schedule"
+        type="event"
+        keywords={[
+          "ICCIST schedule",
+          "conference agenda",
+          "keynote and workshop timings",
+          "technical session timetable",
+          "conference program"
+        ]}
+      />
       {/* Hero Section */}
       <section className="schedule-hero">
         <div className="schedule-hero__pattern"></div>

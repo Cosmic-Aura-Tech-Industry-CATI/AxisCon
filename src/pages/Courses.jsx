@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import Seo from "../components/Seo";
 
 const courses = [
   {
@@ -123,6 +124,18 @@ export default function Courses() {
 
   return (
     <div className="page">
+      <Seo
+        title="Courses and Programs"
+        description="Discover Axis Colleges programs across engineering, architecture, pharmacy, management, and technology disciplines."
+        path="/courses"
+        keywords={[
+          "Axis Colleges courses",
+          "engineering programs Kanpur",
+          "MBA MCA admissions",
+          "pharmacy courses",
+          "BTech MTech programs"
+        ]}
+      />
       <div className="page__header">
         <p className="eyebrow">Programs</p>
         <h1>Explore Our Courses</h1>

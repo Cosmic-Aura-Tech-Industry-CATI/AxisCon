@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import Seo from "../components/Seo";
 import "./Theme.css";
 
 const themes = [
@@ -204,6 +205,18 @@ export default function Theme() {
 
   return (
     <div className="theme-page">
+      <Seo
+        title="Themes and Tracks"
+        description="Explore ICCIST 2026 themes, tracks, topics, and research opportunities across AI, ML, IoT, blockchain, and smart technologies."
+        path="/theme"
+        keywords={[
+          "ICCIST themes",
+          "conference tracks",
+          "AI ML IoT topics",
+          "research domains",
+          "smart technology conference"
+        ]}
+      />
       {/* Hero Section */}
       <section className="theme-hero">
         <div className="theme-hero__content">

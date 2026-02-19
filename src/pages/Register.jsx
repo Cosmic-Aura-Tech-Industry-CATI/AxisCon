@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Seo from "../components/Seo";
 import './Register.css';
 
 const Register = () => {
@@ -199,6 +200,18 @@ const Register = () => {
 
   return (
     <div className="register-page">
+      <Seo
+        title="Conference Registration"
+        description="Register for ICCIST 2026 to attend sessions, workshops, and networking events at Axis Colleges."
+        path="/register"
+        keywords={[
+          "ICCIST registration",
+          "conference registration form",
+          "Axis conference register",
+          "research conference participant",
+          "student conference registration"
+        ]}
+      />
       {/* Hero Section */}
       <section className="register-hero">
         <div className="register-hero__content">

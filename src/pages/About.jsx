@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
+import Seo from "../components/Seo";
 import "./About.css";
 
 const recognitionLogos = [
@@ -50,6 +51,18 @@ export default function About() {
 
   return (
     <div className="about-page">
+      <Seo
+        title="About Axis Institute of Technology and Management"
+        description="Learn about Axis Institute of Technology and Management, approvals, affiliations, mission, and institutional values powering ICCIST 2026."
+        path="/about"
+        keywords={[
+          "Axis Institute of Technology and Management",
+          "about Axis Colleges",
+          "AICTE approved college",
+          "AKTU affiliated institute",
+          "engineering college Kanpur"
+        ]}
+      />
       {/* Hero Section */}
       <section className="about-hero">
         <div className="about-hero__content">
