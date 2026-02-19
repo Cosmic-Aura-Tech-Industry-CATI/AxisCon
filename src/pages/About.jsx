@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import "./about.css";
 
 const recognitionLogos = [
   { src: "/assets/recognition/aicte.webp", name: "AICTE" },
@@ -43,83 +44,86 @@ const values = [
 
 export default function About() {
   return (
-    <div className="page">
-      <div className="page__header">
-        <p className="eyebrow">About AITM</p>
-        <h1>Axis Institute of Technology and Management</h1>
-        <p>
-          Approved by AICTE New Delhi, affiliated to AKTU and BTEUP Lucknow.
-        </p>
-      </div>
+    <div className="about-page">
+      {/* Hero Section */}
+      <section className="about-hero">
+        <div className="about-hero__content">
+          <span className="about-hero__eyebrow">About AITM</span>
+          <h1 className="about-hero__title">
+            Axis Institute of Technology <span>and Management</span>
+          </h1>
+          <p className="about-hero__description">
+            Approved by AICTE New Delhi, affiliated to AKTU and BTEUP Lucknow.
+          </p>
+          <div className="about-hero__actions">
+            <Link to="/conference" className="btn btn--primary">Explore ICCIST 2026</Link>
+            <Link to="/contact" className="btn btn--secondary">Contact Us</Link>
+          </div>
+        </div>
+        <div className="about-hero__pattern"></div>
+      </section>
 
-      <section className="section">
+      {/* Mission Section */}
+      <section className="about-mission">
         <div className="container">
-          <div className="spotlight__card spotlight__card--mission">
-            <div className="spotlight__content">
-              <p className="eyebrow">Our Purpose</p>
+          <div className="about-mission__card">
+            <div className="about-mission__content">
+              <span className="eyebrow">Our Purpose</span>
               <h2>Technology for Practical Impact</h2>
-              <p>
-                "Technology means the systematic application of scientific or
-                other organized knowledge to practical tasks." This is what we
-                seek at Axis Institute of Technology and Management.
+              <p className="about-mission__quote">
+                "Technology means the systematic application of scientific or other organized knowledge to practical tasks."
               </p>
-              <p style={{ marginTop: "var(--spacing-sm)" }}>
-                At Axis Colleges, we follow a technology-based, learner-centric,
-                and result-oriented approach that enhances students' learning
-                and performance capabilities.
+              <p>
+                This is what we seek at Axis Institute of Technology and Management. At Axis Colleges, 
+                we follow a technology-based, learner-centric, and result-oriented approach that enhances 
+                students' learning and performance capabilities.
               </p>
             </div>
-            <div className="spotlight__image">
-              <img
-                src="/assets/brand/axis-logo.webp"
-                alt="Axis Colleges"
-                style={{ maxHeight: "280px" }}
-              />
+            <div className="about-mission__image">
+              <img src="/assets/brand/axis-logo.webp" alt="Axis Colleges" />
             </div>
           </div>
         </div>
       </section>
 
-      
+      {/* Values Section */}
+      <section className="about-values">
+        <div className="container">
+          <div className="section__heading">
+            <span className="eyebrow">Our Values</span>
+            <h2>What We Stand For</h2>
+            <p className="section__subtitle">
+              Axis Colleges is passionate about grooming the nation's youth to grow into excellent 
+              professionals and good human beings.
+            </p>
+          </div>
 
-      
-
-      <section className="section facilities">
-        <div className="section__heading">
-          <p className="eyebrow">Our Values</p>
-          <h2>What We Stand For</h2>
-          <p className="section__subtitle">
-            Axis Colleges is passionate about grooming the nation's youth to
-            grow into excellent professionals and good human beings.
-          </p>
-        </div>
-        <div className="topics-grid">
-          {values.map((value) => (
-            <div key={value.title} className="topic-card">
-              <div className="topic-icon">{value.icon}</div>
-              <h3>{value.title}</h3>
-              <p>{value.description}</p>
-            </div>
-          ))}
+          <div className="about-values__grid">
+            {values.map((value, index) => (
+              <div key={index} className="about-values__card">
+                <div className="about-values__icon">{value.icon}</div>
+                <h3>{value.title}</h3>
+                <p>{value.description}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      
+     
 
-      <section className="cta">
-        <div className="cta__content">
-          <h2>Learn More About ICCIST 2026</h2>
-          <p>
-            Stay informed about conference updates, important dates, and
-            registration details.
-          </p>
-          <div style={{ display: "flex", gap: "var(--spacing-sm)", justifyContent: "center", flexWrap: "wrap" }}>
-            <Link className="btn btn--primary" to="/conference">
-              Visit Conference Page
-            </Link>
-            <Link className="btn btn--secondary" to="/contact">
-              Contact Us
-            </Link>
+      {/* CTA Section */}
+      <section className="about-cta">
+        <div className="container">
+          <div className="about-cta__content">
+            <h2>Learn More About ICCIST 2026</h2>
+            <p>
+              Stay informed about conference updates, important dates, and registration details.
+            </p>
+            <div className="about-cta__actions">
+              <Link to="/conference" className="btn btn--primary">Visit Conference Page</Link>
+              <Link to="/contact" className="btn btn--secondary">Contact Us</Link>
+            </div>
           </div>
         </div>
       </section>

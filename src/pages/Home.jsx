@@ -65,8 +65,8 @@ export default function Home() {
           <div className="hero__text">
             <p className="hero__tag">ICCIST 2026</p>
             <h1>
-              International Conference on Computer Science,
-              <span> Information Technology, and Intelligent Systems</span>
+              International Conference on Computational Intelligence
+              <span> and Smart Technologies</span>
             </h1>
             <p className="hero__lead">
               It is our great pleasure to welcome researchers, faculty members,
