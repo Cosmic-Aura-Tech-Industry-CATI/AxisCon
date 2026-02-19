@@ -1,35 +1,4 @@
-const themes = [
-  {
-    icon: "🤖",
-    title: "Artificial Intelligence",
-    description: "Intelligent systems, reasoning, and real-world applications.",
-  },
-  {
-    icon: "📈",
-    title: "Machine Learning",
-    description: "Predictive models, optimization, and learning algorithms.",
-  },
-  {
-    icon: "🧠",
-    title: "Computational Intelligence",
-    description: "Neural, fuzzy, and evolutionary computing approaches.",
-  },
-  {
-    icon: "🛰️",
-    title: "Smart Technologies",
-    description: "Automation, smart systems, and digital transformation.",
-  },
-  {
-    icon: "📊",
-    title: "Data Science",
-    description: "Analytics, visualization, and data-driven decisions.",
-  },
-  {
-    icon: "🔐",
-    title: "Information Technology",
-    description: "Systems, security, and scalable infrastructure.",
-  },
-];
+
 
 const importantDates = [
   { date: "25-February-2026", label: "Paper submissions open" },
@@ -40,11 +9,7 @@ const importantDates = [
   { date: "04-05 April-2026", label: "Conference dates" },
 ];
 
-const committees = [
-  { title: "Organizing Committee", status: "Yet to announce" },
-  { title: "National Advisory Committee", status: "Yet to announce" },
-  { title: "International Advisory Committee", status: "Yet to announce" },
-];
+
 
 const downloads = [
   { title: "ICCIST 2026 Brochure", href: "#" },
@@ -131,25 +96,7 @@ export default function Conference() {
         </div>
       </section>
 
-      <section className="section events">
-        <div className="section__heading">
-          <p className="eyebrow">Themes</p>
-          <h2>Conference Themes</h2>
-          <p className="section__subtitle">
-            Topics that shape the future of intelligent systems, smart
-            technologies, and data-driven innovation.
-          </p>
-        </div>
-        <div className="topics-grid">
-          {themes.map((theme) => (
-            <div key={theme.title} className="topic-card">
-              <div className="topic-icon">{theme.icon}</div>
-              <h3>{theme.title}</h3>
-              <p>{theme.description}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+      
 
       <section className="section">
         <div className="section__heading">
@@ -181,22 +128,7 @@ export default function Conference() {
         </div>
       </section>
 
-      <section className="section" id="committees">
-        <div className="section__heading">
-          <p className="eyebrow">Committee</p>
-          <h2>Conference Committees</h2>
-          <p className="section__subtitle">Details will be announced soon.</p>
-        </div>
-        <div className="facilities__grid">
-          {committees.map((committee) => (
-            <div key={committee.title} className="facility-card">
-              <div style={{ fontSize: "2.5rem", textAlign: "center" }}>📌</div>
-              <h3>{committee.title}</h3>
-              <p>{committee.status}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+      
 
       <section className="section" id="dates">
         <div className="section__heading">
