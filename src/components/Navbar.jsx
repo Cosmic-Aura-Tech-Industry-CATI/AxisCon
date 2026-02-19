@@ -96,7 +96,7 @@ export default function Navbar() {
                     Research Paper <span className="nav__dropdown-arrow">▼</span>
                   </button>
                   <div className={`nav__dropdown ${isDropdownOpen ? "is-open" : ""}`}>
-                    <a href="#download-paper" className="nav__dropdown-item" onClick={closeMenu}>
+                    <a href="/Sample_IEEE_Conference_Paper_Format.pdf" download="Sample_IEEE_Conference_Paper_Format.pdf" className="nav__dropdown-item" onClick={closeMenu}>
                       Download Research Paper Format
                     </a>
                     <Link to="/submit-paper" className="nav__dropdown-item" onClick={closeMenu}>

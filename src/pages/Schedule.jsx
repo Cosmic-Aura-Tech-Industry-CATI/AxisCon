@@ -295,21 +295,29 @@ export default function Schedule() {
         <div className="container">
           <div className="schedule-download__card">
             <div className="schedule-download__content">
-              <h2>Download Complete Schedule</h2>
-              <p>Get the full conference program with all sessions, venues, and speaker details in PDF format.</p>
+              <h2>Download Resources</h2>
+              <p>Access the complete conference schedule and paper submission template to get started with your research.</p>
               <div className="schedule-download__actions">
-                <button className="btn btn--primary">
+                <a 
+                  href="/Sample_IEEE_Conference_Paper_Format.pdf" 
+                  download="Sample_IEEE_Conference_Paper_Format.pdf"
+                  className="btn btn--primary"
+                >
                   <svg className="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                     <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" strokeWidth="2" strokeLinecap="round"/>
                   </svg>
-                  Download PDF
-                </button>
-                <button className="btn btn--secondary">
+                  Sample Paper Template
+                </a>
+                <a 
+                  href="#" 
+                  className="btn btn--secondary"
+                  title="Schedule PDF will be available soon"
+                >
                   <svg className="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" strokeWidth="2"/>
+                    <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" strokeWidth="2" strokeLinecap="round"/>
                   </svg>
-                  Print Schedule
-                </button>
+                  Download Schedule
+                </a>
               </div>
             </div>
             <div className="schedule-download__image">
