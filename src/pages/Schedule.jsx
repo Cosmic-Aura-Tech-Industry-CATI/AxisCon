@@ -34,7 +34,7 @@ export default function Schedule() {
         <div className="schedule-hero__content">
           <span className="schedule-hero__eyebrow">Conference Program</span>
           <h1 className="schedule-hero__title">
-            ICCIST 2026 <span>Schedule</span>
+            ICCIST 2026 Schedule
           </h1>
           <p className="schedule-hero__description">
             Join us for two days of insightful presentations, engaging workshops, 
