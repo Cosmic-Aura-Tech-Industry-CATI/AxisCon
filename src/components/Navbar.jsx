@@ -19,6 +19,19 @@ export default function Navbar() {
   const closeMenu = () => setIsMenuOpen(false);
   const toggleDropdown = () => setIsDropdownOpen((prev) => !prev);
 
+  // Toggle body scroll when menu opens/closes
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.classList.add('menu-open');
+    } else {
+      document.body.classList.remove('menu-open');
+    }
+
+    return () => {
+      document.body.classList.remove('menu-open');
+    };
+  }, [isMenuOpen]);
+
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -46,7 +59,7 @@ export default function Navbar() {
 
         {/* Mobile Toggle */}
         <button
-          className="nav__toggle"
+          className={`nav__toggle ${isMenuOpen ? "is-active" : ""}`}
           type="button"
           aria-label="Toggle navigation"
           onClick={() => setIsMenuOpen((value) => !value)}
@@ -102,10 +115,19 @@ export default function Navbar() {
                 </Link>
               )
             ))}
+            
+            {/* Register Button - Inside Mobile Menu */}
+            <Link
+              to="/register"
+              className={`nav__link nav__register-button-mobile ${location.pathname === "/register" ? "active" : ""}`}
+              onClick={closeMenu}
+            >
+              <span className="nav__register-text">Register Now</span>
+            </Link>
           </div>
         </div>
 
-        {/* Register Button - Right Section */}
+        {/* Register Button - Desktop Only */}
         <div className="nav__register-wrapper">
           <Link
             to="/register"

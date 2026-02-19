@@ -410,6 +410,10 @@
 
 /* Responsive Design */
 @media (max-width: 900px) {
+  .about-hero {
+    padding: 80px 5vw;
+  }
+
   .about-mission__card {
     grid-template-columns: 1fr;
     text-align: center;
@@ -425,6 +429,11 @@
     order: -1;
   }
 
+  .about-mission__image img {
+    max-width: 200px;
+    margin: 0 auto;
+  }
+
   .about-values__grid,
   .about-recognition__grid,
   .about-milestones__grid {
@@ -433,12 +442,31 @@
 
   .about-hero__actions {
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
+    width: 100%;
   }
 
   .about-hero__actions .btn {
     width: 100%;
-    max-width: 300px;
+  }
+
+  .about-cta {
+    padding: 80px 5vw;
+  }
+}
+
+/* Tablet specific */
+@media (max-width: 768px) and (min-width: 601px) {
+  .about-values__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .about-recognition__grid {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  }
+
+  .about-milestones__grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -448,15 +476,31 @@
   }
 
   .about-hero__title {
-    font-size: 2rem;
+    font-size: clamp(1.8rem, 8vw, 2.5rem);
   }
 
   .about-hero__title span {
-    font-size: 1.3rem;
+    font-size: clamp(1.2rem, 5vw, 1.5rem);
   }
 
   .about-hero__description {
     font-size: 1rem;
+  }
+
+  .about-hero__actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .about-hero__actions .btn {
+    width: 100%;
+  }
+
+  .about-mission,
+  .about-values,
+  .about-recognition,
+  .about-milestones {
+    padding: 60px 4vw;
   }
 
   .about-mission__card {
@@ -489,20 +533,35 @@
     padding: 60px 4vw;
   }
 
+  .about-cta__content h2 {
+    font-size: clamp(1.5rem, 6vw, 2rem);
+  }
+
   .about-cta__actions {
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
+    width: 100%;
   }
 
   .about-cta__actions .btn {
     width: 100%;
-    max-width: 280px;
+  }
+
+  .about-values__grid,
+  .about-recognition__grid,
+  .about-milestones__grid {
+    grid-template-columns: 1fr;
   }
 }
 
 @media (max-width: 480px) {
+  .about-hero {
+    padding: 50px 4vw;
+  }
+
   .about-recognition__grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
   }
 
   .about-recognition__card img {
@@ -514,8 +573,28 @@
   }
 
   .about-hero__eyebrow {
-    font-size: 0.75rem;
-    padding: 6px 15px;
+    font-size: 0.7rem;
+    padding: 6px 14px;
+  }
+
+  .about-hero__title {
+    font-size: clamp(1.5rem, 8vw, 2rem);
+  }
+
+  .about-hero__title span {
+    font-size: clamp(1rem, 5vw, 1.3rem);
+  }
+
+  .about-mission,
+  .about-values,
+  .about-recognition,
+  .about-milestones,
+  .about-cta {
+    padding: 50px 4vw;
+  }
+
+  .about-cta__content h2 {
+    font-size: clamp(1.3rem, 7vw, 1.8rem);
   }
 }
 

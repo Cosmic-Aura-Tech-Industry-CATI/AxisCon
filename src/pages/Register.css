@@ -618,7 +618,26 @@
 }
 
 /* Responsive Design */
+@media (max-width: 900px) {
+  .register-hero {
+    padding: 80px 5vw;
+  }
+
+  .register-section {
+    padding: 80px 5vw;
+  }
+}
+
+/* Tablet */
 @media (max-width: 768px) {
+  .register-hero {
+    padding: 70px 4vw;
+  }
+
+  .register-section {
+    padding: 70px 4vw;
+  }
+
   .register-form {
     padding: var(--spacing-lg);
   }
@@ -667,6 +686,10 @@
     flex-direction: column;
   }
 
+  .success-actions .btn {
+    width: 100%;
+  }
+
   .info-grid {
     grid-template-columns: 1fr;
   }
@@ -683,15 +706,19 @@
 
 @media (max-width: 480px) {
   .register-hero {
-    padding: var(--spacing-2xl) 4vw;
+    padding: 60px 4vw;
   }
 
   .register-hero h1 {
-    font-size: 1.8rem;
+    font-size: clamp(1.5rem, 8vw, 2rem);
+  }
+
+  .register-hero p {
+    font-size: 1rem;
   }
 
   .register-section {
-    padding: var(--spacing-2xl) 4vw;
+    padding: 60px 4vw;
   }
 
   .register-form {
@@ -699,7 +726,7 @@
   }
 
   .form-step h2 {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
   }
 
   .step-number {
@@ -719,13 +746,18 @@
   }
 
   .register-success h1 {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
   }
 
   .success-details .summary-item {
     flex-direction: column;
     align-items: flex-start;
     gap: var(--spacing-xs);
+  }
+
+  .form-navigation .btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
   }
 }
 
