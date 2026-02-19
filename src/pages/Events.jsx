@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 
 const events = [
   {
@@ -76,6 +76,10 @@ const upcomingEvents = [
 ];
 
 export default function Events() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const eventRows = useMemo(() => {
     const chunkSize = 3;
     const rows = [];

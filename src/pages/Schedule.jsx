@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./Schedule.css";
 
 const conferenceDays = [
@@ -128,6 +128,10 @@ const sessionTypes = [
 ];
 
 export default function Schedule() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const [activeDay, setActiveDay] = useState(0);
   const [filterType, setFilterType] = useState("all");
 

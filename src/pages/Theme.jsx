@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./Theme.css";
 
 const themes = [
@@ -195,6 +195,10 @@ const featuredThemes = themes.slice(0, 3);
 const additionalThemes = themes.slice(3);
 
 export default function Theme() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const [selectedTheme, setSelectedTheme] = useState(themes[0]);
   const [activeTab, setActiveTab] = useState("overview");
 

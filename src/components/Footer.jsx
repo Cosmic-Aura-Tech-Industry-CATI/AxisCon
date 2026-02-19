@@ -37,6 +37,13 @@ const socialLinks = [
   },
 ];
 
+const scrollToTop = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+};
+
 export default function Footer() {
   return (
     <footer className="footer">
@@ -113,6 +120,16 @@ export default function Footer() {
         <p className="footer__copy">
           Copyright © 2026 ICCIST. All rights reserved.
         </p>
+        <button
+          className="footer__scroll-top"
+          onClick={scrollToTop}
+          aria-label="Scroll to top"
+          title="Back to top"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M12 19V5M5 12l7-7 7 7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </button>
       </div>
     </footer>
   );

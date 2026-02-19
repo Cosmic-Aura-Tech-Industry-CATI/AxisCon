@@ -51,7 +51,13 @@ const downloads = [
   { title: "ICCIST 2026 Paper Format", href: "#" },
 ];
 
+import { useEffect } from "react";
+
 export default function Conference() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="page">
       <div className="conference-hero">

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./Committee.css";
 
 const organizingCommittee = [
@@ -235,6 +235,10 @@ const technicalReviewCommittee = [
 ];
 
 export default function Committee() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const [activeTab, setActiveTab] = useState("organizing");
   const [searchTerm, setSearchTerm] = useState("");
 

@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 const courses = [
   {
     title: "M-Tech",
@@ -115,6 +117,10 @@ const categories = [
 ];
 
 export default function Courses() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="page">
       <div className="page__header">

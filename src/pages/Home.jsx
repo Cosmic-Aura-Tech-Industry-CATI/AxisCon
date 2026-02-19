@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 const recognitionLogos = [
   "/assets/recognition/aicte.webp",
@@ -58,6 +59,10 @@ const committee = [
 ];
 
 export default function Home() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
       <header className="hero">
