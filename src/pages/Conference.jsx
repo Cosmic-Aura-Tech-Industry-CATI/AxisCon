@@ -79,7 +79,7 @@ export default function Conference() {
       />
       <div className="conference-hero">
         <div className="conference-info">
-          <p className="eyebrow">ICCIST 2026</p>
+          <h2 className="eyebrow">ICCIST 2026</h2>
           <h1>Welcome to ICCIST 2026</h1>
           <p
             style={{
@@ -180,25 +180,6 @@ export default function Conference() {
         </div>
       </section>
 
-      
-
-      <section className="section" id="dates">
-        <div className="section__heading">
-          <p className="eyebrow">Program Schedule</p>
-          <h2>Important Dates</h2>
-          <p className="section__subtitle">
-            Please note and plan for submissions and participation.
-          </p>
-        </div>
-        <div className="schedule-timeline">
-          {importantDates.map((item) => (
-            <div key={item.label} className="schedule-item">
-              <div className="schedule-time">{item.date}</div>
-              <p className="schedule-description">{item.label}</p>
-            </div>
-          ))}
-        </div>
-      </section>
 
       <section className="section facilities" id="registration">
         <div className="section__heading">

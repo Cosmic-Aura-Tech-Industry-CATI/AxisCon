@@ -222,7 +222,7 @@ export default function Theme() {
         <div className="theme-hero__content">
           <span className="theme-hero__eyebrow">ICCIST 2026</span>
           <h1 className="theme-hero__title">
-            Conference <span>Themes & Tracks</span>
+            Conference Themes & Tracks
           </h1>
           <p className="theme-hero__description">
             Explore the diverse range of topics and research areas that define
@@ -428,88 +428,10 @@ export default function Theme() {
       </section>
 
       {/* All Themes Grid */}
-      <section className="all-themes">
-        <div className="container">
-          <div className="section-header">
-            <span className="section-eyebrow">Complete List</span>
-            <h2 className="section-title">All Conference Themes</h2>
-            <p className="section-description">
-              Explore the full spectrum of research areas at ICCIST 2026
-            </p>
-          </div>
-
-          <div className="themes-grid">
-            {additionalThemes.map((theme) => (
-              <div
-                key={theme.id}
-                className="theme-card"
-                onClick={() => {
-                  setSelectedTheme(theme);
-                  window.scrollTo({ top: 600, behavior: 'smooth' });
-                }}
-              >
-                <div className="theme-card__header" style={{ background: theme.gradient }}>
-                  <span className="theme-card__icon">{theme.icon}</span>
-                </div>
-                <div className="theme-card__body">
-                  <h3 className="theme-card__title">{theme.title}</h3>
-                  <p className="theme-card__description">{theme.description}</p>
-                  <div className="theme-card__meta">
-                    <span className="theme-card__topics">{theme.topics.length} Topics</span>
-                    <span className="theme-card__papers">{theme.papers} Papers</span>
-                  </div>
-                  <button className="theme-card__btn">
-                    View Details
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                      <path d="M9 5l7 7-7 7" strokeWidth="2"/>
-                    </svg>
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      
 
       {/* Call for Papers */}
-      <section className="theme-cfp">
-        <div className="container">
-          <div className="cfp-card">
-            <div className="cfp-content">
-              <h2>Call for Papers</h2>
-              <p>
-                Submit your research to ICCIST 2026 and contribute to the advancement
-                of computational intelligence and smart technologies.
-              </p>
-              <div className="cfp-dates">
-                <div className="cfp-date">
-                  <span className="date-label">Submission Deadline</span>
-                  <span className="date-value">March 25, 2026</span>
-                </div>
-                <div className="cfp-date">
-                  <span className="date-label">Notification Date</span>
-                  <span className="date-value">As per submission</span>
-                </div>
-                <div className="cfp-date">
-                  <span className="date-label">Conference Dates</span>
-                  <span className="date-value">April 4-5, 2026</span>
-                </div>
-              </div>
-              <div className="cfp-actions">
-                <Link to="/conference" className="btn btn--primary">
-                  View Full Details
-                </Link>
-                <Link to="/schedule" className="btn btn--secondary">
-                  Important Dates
-                </Link>
-              </div>
-            </div>
-            <div className="cfp-image">
-              <img src="/assets/cta/cta-1.jpg" alt="Call for Papers" />
-            </div>
-          </div>
-        </div>
-      </section>
+      
 
       {/* Submission Guidelines */}
       <section className="submission-guidelines">

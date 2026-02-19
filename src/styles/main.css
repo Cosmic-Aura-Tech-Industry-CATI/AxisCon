@@ -198,13 +198,19 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Navigation */
 .nav {
-  max-width: var(--max-width);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  max-width: 100%;
   margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--spacing-md);
   padding: var(--spacing-md) 6vw;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(10px);
 }
 
 .nav__brand {
@@ -529,7 +535,7 @@ h1, h2, h3, h4, h5, h6 {
       rgba(255, 193, 7, 0.2),
       transparent 40%
     ),
-    linear-gradient(120deg, rgba(6, 10, 20, 0.8), rgba(7, 10, 20, 0.95)),
+    linear-gradient(120deg, rgba(6, 10, 20, 0.5), rgba(7, 10, 20, 0.65)),
     url("/assets/brand/hero-bg.png");
   background-size: cover;
   background-position: center;

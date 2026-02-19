@@ -713,8 +713,8 @@ const Register = () => {
           <div className="info-card">
             <div className="info-icon">📅</div>
             <h3>Conference Dates</h3>
-            <p>March 15-17, 2024</p>
-            <p className="info-sub">Doors open at 8:00 AM daily</p>
+            <p>March 04-05, 2026</p>
+            <p className="info-sub">Doors open at 10:00 AM daily</p>
           </div>
 
           <div className="info-card">
@@ -727,7 +727,7 @@ const Register = () => {
           <div className="info-card">
             <div className="info-icon">⏰</div>
             <h3>Registration Deadline</h3>
-            <p>March 10, 2024</p>
+            <p>March 01, 2026</p>
             <p className="info-sub">Limited spots available</p>
           </div>
 

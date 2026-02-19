@@ -284,7 +284,7 @@ export default function Committee() {
         <div className="committee-hero__content">
           <span className="committee-hero__eyebrow">Conference Leadership</span>
           <h1 className="committee-hero__title">
-            ICCIST 2026 <span>Committee</span>
+            ICCIST 2026 Committee
           </h1>
           <p className="committee-hero__description">
             Meet the distinguished experts and leaders who are shaping the future of 
@@ -336,14 +336,7 @@ export default function Committee() {
               <span className="tab-label">International Advisory</span>
               <span className="tab-count">{internationalAdvisory.length}</span>
             </button>
-            <button 
-              className={`committee-tab ${activeTab === 'technical' ? 'active' : ''}`}
-              onClick={() => setActiveTab('technical')}
-            >
-              <span className="tab-icon">🔬</span>
-              <span className="tab-label">Technical Review</span>
-              <span className="tab-count">{technicalReviewCommittee.length}</span>
-            </button>
+            
           </div>
 
           {/* Search Bar */}

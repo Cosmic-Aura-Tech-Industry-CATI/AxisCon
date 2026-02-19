@@ -91,10 +91,10 @@ export default function Home() {
       <header className="hero">
         <div className="hero__content">
           <div className="hero__text">
-            <p className="hero__tag">ICCIST 2026</p>
-            <h1>
+            <h2 className="hero__tag">ICCIST 2026</h2>
+            <h1 style={{fontSize:"clamp(1.5rem, 5vw, 3rem);"}}>
               International Conference on Computational Intelligence
-              <span> and Smart Technologies</span>
+               and Smart Technologies
             </h1>
             <p className="hero__lead">
               It is our great pleasure to welcome researchers, faculty members,
@@ -111,20 +111,7 @@ export default function Home() {
               </Link>
             </div>
           </div>
-          <div className="hero__panel">
-            <div className="hero__stat">
-              <p className="hero__stat-value">AI</p>
-              <p className="hero__stat-label">Intelligent Systems</p>
-            </div>
-            <div className="hero__stat">
-              <p className="hero__stat-value">ML</p>
-              <p className="hero__stat-label">Data-Driven Innovation</p>
-            </div>
-            <div className="hero__stat">
-              <p className="hero__stat-value">IT</p>
-              <p className="hero__stat-label">Digital Transformation</p>
-            </div>
-          </div>
+          
         </div>
       </header>
 
@@ -151,45 +138,6 @@ export default function Home() {
                 <p>{area.subtitle}</p>
               </div>
             </article>
-          ))}
-        </div>
-      </section>
-
-      
-
-      <section className="section">
-        <div className="section__heading">
-          <p className="eyebrow">Program Schedule</p>
-          <h2>Important Dates</h2>
-          <p className="section__subtitle">
-            Plan your submissions and participation for ICCIST 2026.
-          </p>
-        </div>
-        <div className="schedule-timeline" style={{ maxWidth: "860px" }}>
-          {importantDates.map((item) => (
-            <div key={item.label} className="schedule-item">
-              <div className="schedule-time">{item.date}</div>
-              <p className="schedule-description">{item.label}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="section events">
-        <div className="section__heading">
-          <p className="eyebrow">Committee</p>
-          <h2>Conference Committees</h2>
-          <p className="section__subtitle">
-            Committee details will be announced soon.
-          </p>
-        </div>
-        <div className="topics-grid">
-          {committee.map((item) => (
-            <div key={item.title} className="topic-card">
-              <div className="topic-icon">📌</div>
-              <h3>{item.title}</h3>
-              <p>{item.description}</p>
-            </div>
           ))}
         </div>
       </section>

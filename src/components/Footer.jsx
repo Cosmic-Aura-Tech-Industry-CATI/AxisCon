@@ -84,10 +84,7 @@ export default function Footer() {
                   {link.label}
                 </Link>
               ))}
-              {/* Register link as part of navigation */}
-              <Link to="/register" className="footer__nav-link footer__nav-link--register">
-                Register Now
-              </Link>
+              
             </div>
           </div>
         </div>

@@ -67,8 +67,8 @@ export default function About() {
       <section className="about-hero">
         <div className="about-hero__content">
           <span className="about-hero__eyebrow">About AITM</span>
-          <h1 className="about-hero__title">
-            Axis Institute of Technology <span>and Management</span>
+          <h1 className="about-hero__title" style={{fontSize:"clamp(3rem, 6vw, 4.5rem)"}}>
+            Axis Institute of Technology and Management
           </h1>
           <p className="about-hero__description">
             Approved by AICTE New Delhi, affiliated to AKTU and BTEUP Lucknow.
@@ -91,11 +91,12 @@ export default function About() {
               <p className="about-mission__quote">
                 "Technology means the systematic application of scientific or other organized knowledge to practical tasks."
               </p>
-              <p>
-                This is what we seek at Axis Institute of Technology and Management. At Axis Colleges, 
-                we follow a technology-based, learner-centric, and result-oriented approach that enhances 
-                students' learning and performance capabilities.
-              </p>
+              <p style={{ textAlign: "justify" }}>
+  This is what we seek at Axis Institute of Technology and Management. 
+  At Axis Colleges, we follow a technology-based, learner-centric, and 
+  result-oriented approach that enhances students' learning and performance capabilities.
+</p>
+
             </div>
             <div className="about-mission__image">
               <img src="/assets/brand/axis-logo.webp" alt="Axis Colleges" />
