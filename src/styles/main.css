@@ -1041,7 +1041,7 @@ h1, h2, h3, h4, h5, h6 {
   background: url("/assets/brand/hero-bg.png");
   background-size: cover;
   background-position: center;
-  opacity: 0.3;
+  opacity: 0.6;
   z-index: -2;
 }
 
@@ -1049,7 +1049,7 @@ h1, h2, h3, h4, h5, h6 {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(63, 79, 157, 0.7), rgba(255, 193, 7, 0.4));
+  background: linear-gradient(135deg, rgba(63, 79, 157, 0.4), rgba(255, 193, 7, 0.2));
   z-index: -1;
 }
 

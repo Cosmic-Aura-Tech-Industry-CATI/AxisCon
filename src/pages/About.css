@@ -96,10 +96,15 @@
   position: absolute;
   inset: 0;
   background-image: 
-    radial-gradient(circle at 20% 40%, rgba(63, 79, 157, 0.1) 1px, transparent 1px),
-    radial-gradient(circle at 80% 60%, rgba(255, 193, 7, 0.1) 1px, transparent 1px);
-  background-size: 50px 50px;
+    repeating-linear-gradient(45deg, rgba(63, 79, 157, 0.1) 0px, rgba(63, 79, 157, 0.1) 2px, transparent 2px, transparent 20px),
+    repeating-linear-gradient(135deg, rgba(255, 193, 7, 0.1) 0px, rgba(255, 193, 7, 0.1) 2px, transparent 2px, transparent 20px);
   pointer-events: none;
+  animation: patternMove 20s linear infinite;
+}
+
+@keyframes patternMove {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(20px, 20px); }
 }
 
 /* Mission Section */
