@@ -106,7 +106,7 @@ export default function Home() {
               <Link className="btn btn--primary" to="/conference">
                 View Conference
               </Link>
-              <Link className="btn btn--secondary" to="/conference">
+              <Link className="btn btn--secondary" to="/schedule">
                 Important Dates
               </Link>
             </div>
