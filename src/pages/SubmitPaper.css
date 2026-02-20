@@ -776,3 +776,123 @@
     transition: none;
   }
 }
+
+
+/* Co-author Input Group */
+.coauthor-input-group {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+}
+
+.coauthors-list {
+  margin-top: var(--spacing-xl);
+}
+
+.coauthors-list h3 {
+  color: var(--secondary-yellow);
+  font-size: 1rem;
+  margin-bottom: var(--spacing-md);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.coauthor-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-md);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--spacing-sm);
+  transition: all 0.3s ease;
+}
+
+.coauthor-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--primary-blue-light);
+}
+
+.coauthor-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.coauthor-details strong {
+  color: var(--text);
+  font-size: 1rem;
+}
+
+.coauthor-details span {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* Declaration Group */
+.declaration-group {
+  padding: var(--spacing-md);
+  background: rgba(255, 193, 7, 0.05);
+  border: 1px solid rgba(255, 193, 7, 0.2);
+  border-radius: var(--radius-sm);
+}
+
+.declaration-group .checkbox-label {
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* Slide Down Animation */
+.slide-down {
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Remove unused styles */
+.conference-track-options,
+.presentation-types,
+.participation-modes,
+.keywords-section,
+.upload-section-additional {
+  display: none;
+}
+
+/* Responsive adjustments for co-author section */
+@media (max-width: 768px) {
+  .coauthor-input-group {
+    padding: var(--spacing-md);
+  }
+  
+  .coauthor-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+  }
+  
+  .coauthor-item .btn-remove-author {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .coauthor-details strong {
+    font-size: 0.95rem;
+  }
+  
+  .coauthor-details span {
+    font-size: 0.85rem;
+  }
+}

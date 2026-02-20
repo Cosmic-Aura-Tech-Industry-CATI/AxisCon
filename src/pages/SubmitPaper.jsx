@@ -2,66 +2,59 @@ import { useState, useEffect } from 'react';
 import Seo from "../components/Seo";
 import './SubmitPaper.css';
 
-const conferenceTrackOptions = [
-  'Artificial Intelligence',
-  'Machine Learning',
-  'Deep Learning',
-  'Data Science & Analytics',
-  'Internet of Things (IoT)',
-  'Cloud Computing',
-  'Cyber Security',
-  'Blockchain Technology',
-  'Natural Language Processing',
-  'Computer Vision',
-  'Software Engineering',
-  'Information Technology',
-  'Other'
-];
-
-const presentationTypes = ['Oral Presentation', 'Poster Presentation'];
-const participationModes = ['Online', 'Offline'];
-const designations = ['Student', 'Faculty', 'Industry Professional', 'Researcher'];
-
 const SubmitPaper = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   const [formData, setFormData] = useState({
-    paperTitle: '',
-    abstract: '',
-    keywords: [],
-    conferenceTrack: '',
-    subTheme: '',
-    presentationType: '',
-    participationMode: '',
-    authors: [{
-      id: 1,
-      fullName: '',
-      email: '',
-      mobile: '',
-      designation: '',
-      department: '',
-      institution: '',
-      city: '',
-      country: '',
-      orcidId: '',
-      isCorresponding: true
-    }],
-    fullPaper: null,
-    plagiarismReport: null,
-    copyrightForm: null,
-    paymentScreenshot: null,
-    declarations: {
-      original: false,
-      notSubmitted: false,
-      agreeTerms: false
-    }
+    // Author Information
+    email: '',
+    salutation: '',
+    correspondingAuthorName: '',
+    designation: '',
+    affiliation: '',
+    department: '',
+    organizationAddress: '',
+    city: '',
+    pincode: '',
+    country: '',
+    nationality: '',
+    contactNumber: '',
+    
+    // Co-Authors
+    coAuthors: [],
+    
+    // Paper Details
+    title: '',
+    typeOfSubmission: '',
+    abstractFile: null,
+    fullPaperFile: null,
+    
+    // Declaration
+    declaration: false
   });
 
-  const [keywordInput, setKeywordInput] = useState('');
+  const [coAuthorInput, setCoAuthorInput] = useState({
+    name: '',
+    affiliation: ''
+  });
+  
   const [uploadProgress, setUploadProgress] = useState({});
   const [errors, setErrors] = useState({});
+
+  const salutationOptions = ['Mr.', 'Ms.', 'Dr.', 'Prof.'];
+  const designationOptions = [
+    'UG Student',
+    'PG Student',
+    'PhD Scholar',
+    'Faculty',
+    'Industry Professional',
+    'Researcher',
+    'Independent Researcher'
+  ];
+  const nationalityOptions = ['Indian', 'Foreign'];
+  const submissionTypeOptions = ['Abstract Only', 'Full Paper'];
 
   // Handle input changes
   const handleInputChange = (e) => {
@@ -72,94 +65,46 @@ const SubmitPaper = () => {
     }
   };
 
-  // Handle keyword addition
-  const addKeyword = (e) => {
-    if (e.key === 'Enter' && keywordInput.trim()) {
-      e.preventDefault();
-      if (formData.keywords.length < 6) {
-        setFormData(prev => ({
-          ...prev,
-          keywords: [...prev.keywords, keywordInput.trim()]
-        }));
-        setKeywordInput('');
-      }
+  // Handle co-author input changes
+  const handleCoAuthorInputChange = (e) => {
+    const { name, value } = e.target;
+    setCoAuthorInput(prev => ({ ...prev, [name]: value }));
+  };
+
+  // Add co-author
+  const addCoAuthor = () => {
+    if (coAuthorInput.name.trim() && coAuthorInput.affiliation.trim()) {
+      setFormData(prev => ({
+        ...prev,
+        coAuthors: [...prev.coAuthors, { ...coAuthorInput }]
+      }));
+      setCoAuthorInput({ name: '', affiliation: '' });
     }
   };
 
-  // Remove keyword
-  const removeKeyword = (index) => {
+  // Remove co-author
+  const removeCoAuthor = (index) => {
     setFormData(prev => ({
       ...prev,
-      keywords: prev.keywords.filter((_, i) => i !== index)
+      coAuthors: prev.coAuthors.filter((_, i) => i !== index)
     }));
   };
 
-  // Handle author changes
-  const handleAuthorChange = (index, field, value) => {
-    const updatedAuthors = [...formData.authors];
-    updatedAuthors[index][field] = value;
-    setFormData(prev => ({ ...prev, authors: updatedAuthors }));
-  };
-
-  // Add new author
-  const addAuthor = () => {
-    const newAuthor = {
-      id: formData.authors.length + 1,
-      fullName: '',
-      email: '',
-      mobile: '',
-      designation: '',
-      department: '',
-      institution: '',
-      city: '',
-      country: '',
-      orcidId: '',
-      isCorresponding: false
-    };
-    setFormData(prev => ({
-      ...prev,
-      authors: [...prev.authors, newAuthor]
-    }));
-  };
-
-  // Remove author
-  const removeAuthor = (index) => {
-    if (formData.authors.length > 1) {
-      const updatedAuthors = formData.authors.filter((_, i) => i !== index);
-      // If removed author was corresponding, make first author corresponding
-      if (formData.authors[index].isCorresponding && updatedAuthors.length > 0) {
-        updatedAuthors[0].isCorresponding = true;
-      }
-      setFormData(prev => ({ ...prev, authors: updatedAuthors }));
-    }
-  };
-
-  // Set corresponding author
-  const setCorrespondingAuthor = (index) => {
-    const updatedAuthors = formData.authors.map((author, i) => ({
-      ...author,
-      isCorresponding: i === index
-    }));
-    setFormData(prev => ({ ...prev, authors: updatedAuthors }));
-  };
-
-  // Handle file upload with validation
+  // Handle file upload
   const handleFileUpload = (e, fieldName) => {
     const file = e.target.files[0];
     if (!file) return;
 
     // File type validation
     const allowedTypes = {
-      fullPaper: ['application/pdf'],
-      plagiarismReport: ['application/pdf'],
-      copyrightForm: ['application/pdf'],
-      paymentScreenshot: ['image/jpeg', 'image/png', 'image/jpg', 'application/pdf']
+      abstractFile: ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'],
+      fullPaperFile: ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document']
     };
 
     if (!allowedTypes[fieldName].includes(file.type)) {
       setErrors(prev => ({
         ...prev,
-        [fieldName]: `Invalid file type. Please upload ${fieldName === 'paymentScreenshot' ? 'PDF or Image' : 'PDF'} only.`
+        [fieldName]: 'Invalid file type. Please upload PDF or Word document only.'
       }));
       return;
     }
@@ -191,45 +136,43 @@ const SubmitPaper = () => {
     setErrors(prev => ({ ...prev, [fieldName]: '' }));
   };
 
-  // Handle declaration checkbox
-  const handleDeclarationChange = (field) => {
-    setFormData(prev => ({
-      ...prev,
-      declarations: {
-        ...prev.declarations,
-        [field]: !prev.declarations[field]
-      }
-    }));
-  };
-
   // Form validation
   const validateForm = () => {
     const newErrors = {};
 
-    if (!formData.paperTitle.trim()) newErrors.paperTitle = 'Paper title is required';
-    if (!formData.abstract.trim()) newErrors.abstract = 'Abstract is required';
-    if (formData.abstract.length < 250) newErrors.abstract = 'Abstract must be at least 250 words';
-    if (formData.abstract.length > 300) newErrors.abstract = 'Abstract cannot exceed 300 words';
-    if (formData.keywords.length === 0) newErrors.keywords = 'At least one keyword is required';
-    if (!formData.conferenceTrack) newErrors.conferenceTrack = 'Conference track is required';
-    if (!formData.presentationType) newErrors.presentationType = 'Presentation type is required';
-    if (!formData.participationMode) newErrors.participationMode = 'Participation mode is required';
+    // Author Information validation
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = 'Please enter a valid email address';
+    }
 
-    // Validate authors
-    formData.authors.forEach((author, index) => {
-      if (!author.fullName.trim()) newErrors[`author_${index}_name`] = 'Author name is required';
-      if (!author.email.trim()) newErrors[`author_${index}_email`] = 'Author email is required';
-      if (!author.mobile.trim()) newErrors[`author_${index}_mobile`] = 'Mobile number is required';
-      if (!author.designation) newErrors[`author_${index}_designation`] = 'Designation is required';
-      if (!author.institution.trim()) newErrors[`author_${index}_institution`] = 'Institution is required';
-    });
+    if (!formData.salutation) newErrors.salutation = 'Salutation is required';
+    if (!formData.correspondingAuthorName.trim()) newErrors.correspondingAuthorName = 'Corresponding author name is required';
+    if (!formData.designation) newErrors.designation = 'Designation is required';
+    if (!formData.affiliation.trim()) newErrors.affiliation = 'Affiliation/Institution is required';
+    if (!formData.department.trim()) newErrors.department = 'Department is required';
+    if (!formData.organizationAddress.trim()) newErrors.organizationAddress = 'Organization address is required';
+    if (!formData.city.trim()) newErrors.city = 'City is required';
+    if (!formData.pincode.trim()) newErrors.pincode = 'Pincode is required';
+    if (!formData.country.trim()) newErrors.country = 'Country is required';
+    if (!formData.nationality) newErrors.nationality = 'Nationality is required';
+    if (!formData.contactNumber.trim()) newErrors.contactNumber = 'Contact number is required';
 
-    if (!formData.fullPaper) newErrors.fullPaper = 'Full paper upload is required';
-    if (!formData.copyrightForm) newErrors.copyrightForm = 'Copyright form is required';
+    // Paper Details validation
+    if (!formData.title.trim()) newErrors.title = 'Title is required';
+    if (!formData.typeOfSubmission) newErrors.typeOfSubmission = 'Type of submission is required';
 
-    if (!formData.declarations.original) newErrors.declaration = 'Please accept all declarations';
-    if (!formData.declarations.notSubmitted) newErrors.declaration = 'Please accept all declarations';
-    if (!formData.declarations.agreeTerms) newErrors.declaration = 'Please accept all declarations';
+    // File upload validation based on submission type
+    if (formData.typeOfSubmission === 'Abstract Only' && !formData.abstractFile) {
+      newErrors.abstractFile = 'Abstract file is required';
+    }
+    if (formData.typeOfSubmission === 'Full Paper' && !formData.fullPaperFile) {
+      newErrors.fullPaperFile = 'Full paper file is required';
+    }
+
+    // Declaration validation
+    if (!formData.declaration) newErrors.declaration = 'You must accept the declaration';
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -240,43 +183,27 @@ const SubmitPaper = () => {
     e.preventDefault();
     
     if (validateForm()) {
-      console.log('Form submitted:', formData);
+      console.log('Paper submitted:', formData);
       alert('Research paper submitted successfully! You will receive a confirmation email shortly.');
       // Here you would typically send data to your backend
-    } else {
-      alert('Please fill in all required fields correctly.');
     }
   };
-
-  const isFormValid = formData.declarations.original && 
-                     formData.declarations.notSubmitted && 
-                     formData.declarations.agreeTerms;
 
   return (
     <div className="submit-paper-page">
       <Seo
         title="Submit Research Paper"
-        description="Submit your research paper to ICCIST 2026 with author details, abstract, document upload, and declarations."
+        description="Submit your research paper to ICCIST 2026 with author details, abstract, and declaration."
         path="/submit-paper"
         type="article"
         keywords={[
           "submit research paper",
           "ICCIST paper submission",
           "conference paper format",
-          "academic paper upload",
-          "IEEE conference template"
-        ]}
-        faqs={[
-          {
-            question: "What files are required for paper submission?",
-            answer: "You need full paper PDF and copyright form, while plagiarism report and payment screenshot are optional as per process updates."
-          },
-          {
-            question: "Can multiple authors be added in one submission?",
-            answer: "Yes, the submission form supports adding multiple authors and selecting a corresponding author."
-          }
+          "academic paper upload"
         ]}
       />
+      
       {/* Hero Section */}
       <section className="submit-hero">
         <div className="submit-hero__content">
@@ -296,435 +223,378 @@ const SubmitPaper = () => {
         <div className="submit-container">
           <form onSubmit={handleSubmit} className="submit-form">
             
-            {/* Section A: Paper Details */}
+            {/* Section 1: Author Information */}
             <div className="form-section">
               <div className="form-section-header">
-                <div className="section-icon">📄</div>
-                <h2>Paper Details</h2>
+                <div className="section-icon">👤</div>
+                <h2>Author Information</h2>
               </div>
 
+              {/* Email */}
               <div className="form-group">
-                <label className="form-label required">Paper Title</label>
+                <label className="form-label required">Email</label>
                 <input
-                  type="text"
-                  name="paperTitle"
-                  value={formData.paperTitle}
+                  type="email"
+                  name="email"
+                  value={formData.email}
                   onChange={handleInputChange}
-                  className={`form-input ${errors.paperTitle ? 'error' : ''}`}
-                  placeholder="Enter your research paper title"
+                  className={`form-input ${errors.email ? 'error' : ''}`}
+                  placeholder="author@example.com"
                 />
-                {errors.paperTitle && <span className="error-message">{errors.paperTitle}</span>}
+                {errors.email && <span className="error-message">{errors.email}</span>}
               </div>
 
-              <div className="form-group">
-                <label className="form-label required">
-                  Abstract <span className="char-count">({formData.abstract.length}/300 words)</span>
-                </label>
-                <textarea
-                  name="abstract"
-                  value={formData.abstract}
-                  onChange={handleInputChange}
-                  className={`form-textarea ${errors.abstract ? 'error' : ''}`}
-                  placeholder="Enter abstract (250-300 words)..."
-                  rows="8"
-                />
-                {errors.abstract && <span className="error-message">{errors.abstract}</span>}
-              </div>
-
-              <div className="form-group">
-                <label className="form-label required">
-                  Keywords <span className="keyword-count">({formData.keywords.length}/6)</span>
-                </label>
-                <div className="keywords-input-wrapper">
-                  <input
-                    type="text"
-                    value={keywordInput}
-                    onChange={(e) => setKeywordInput(e.target.value)}
-                    onKeyDown={addKeyword}
-                    className="form-input"
-                    placeholder="Type keyword and press Enter"
-                    disabled={formData.keywords.length >= 6}
-                  />
-                </div>
-                <div className="keywords-list">
-                  {formData.keywords.map((keyword, index) => (
-                    <span key={index} className="keyword-tag">
-                      {keyword}
-                      <button type="button" onClick={() => removeKeyword(index)} className="keyword-remove">×</button>
-                    </span>
-                  ))}
-                </div>
-                {errors.keywords && <span className="error-message">{errors.keywords}</span>}
-              </div>
-
+              {/* Salutation and Name Row */}
               <div className="form-row">
                 <div className="form-group">
-                  <label className="form-label required">Conference Track</label>
+                  <label className="form-label required">Salutation</label>
                   <select
-                    name="conferenceTrack"
-                    value={formData.conferenceTrack}
+                    name="salutation"
+                    value={formData.salutation}
                     onChange={handleInputChange}
-                    className={`form-select ${errors.conferenceTrack ? 'error' : ''}`}
+                    className={`form-select ${errors.salutation ? 'error' : ''}`}
                   >
-                    <option value="">Select Track</option>
-                    {conferenceTrackOptions.map(track => (
-                      <option key={track} value={track}>{track}</option>
+                    <option value="">Select Salutation</option>
+                    {salutationOptions.map(option => (
+                      <option key={option} value={option}>{option}</option>
                     ))}
                   </select>
-                  {errors.conferenceTrack && <span className="error-message">{errors.conferenceTrack}</span>}
+                  {errors.salutation && <span className="error-message">{errors.salutation}</span>}
                 </div>
 
                 <div className="form-group">
-                  <label className="form-label">Sub-theme (Optional)</label>
+                  <label className="form-label required">Corresponding Author Name</label>
                   <input
                     type="text"
-                    name="subTheme"
-                    value={formData.subTheme}
+                    name="correspondingAuthorName"
+                    value={formData.correspondingAuthorName}
                     onChange={handleInputChange}
-                    className="form-input"
-                    placeholder="Enter sub-theme"
+                    className={`form-input ${errors.correspondingAuthorName ? 'error' : ''}`}
+                    placeholder="Full name"
                   />
+                  {errors.correspondingAuthorName && <span className="error-message">{errors.correspondingAuthorName}</span>}
                 </div>
               </div>
 
+              {/* Designation */}
+              <div className="form-group">
+                <label className="form-label required">Designation</label>
+                <select
+                  name="designation"
+                  value={formData.designation}
+                  onChange={handleInputChange}
+                  className={`form-select ${errors.designation ? 'error' : ''}`}
+                >
+                  <option value="">Select Designation</option>
+                  {designationOptions.map(option => (
+                    <option key={option} value={option}>{option}</option>
+                  ))}
+                </select>
+                {errors.designation && <span className="error-message">{errors.designation}</span>}
+              </div>
+
+              {/* Affiliation and Department Row */}
               <div className="form-row">
                 <div className="form-group">
-                  <label className="form-label required">Presentation Type</label>
-                  <div className="radio-group">
-                    {presentationTypes.map(type => (
-                      <label key={type} className="radio-label">
-                        <input
-                          type="radio"
-                          name="presentationType"
-                          value={type}
-                          checked={formData.presentationType === type}
-                          onChange={handleInputChange}
-                        />
-                        <span>{type}</span>
-                      </label>
-                    ))}
-                  </div>
-                  {errors.presentationType && <span className="error-message">{errors.presentationType}</span>}
+                  <label className="form-label required">Affiliation / Institution</label>
+                  <input
+                    type="text"
+                    name="affiliation"
+                    value={formData.affiliation}
+                    onChange={handleInputChange}
+                    className={`form-input ${errors.affiliation ? 'error' : ''}`}
+                    placeholder="University/Institute name"
+                  />
+                  {errors.affiliation && <span className="error-message">{errors.affiliation}</span>}
                 </div>
 
                 <div className="form-group">
-                  <label className="form-label required">Participation Mode</label>
-                  <div className="radio-group">
-                    {participationModes.map(mode => (
-                      <label key={mode} className="radio-label">
-                        <input
-                          type="radio"
-                          name="participationMode"
-                          value={mode}
-                          checked={formData.participationMode === mode}
-                          onChange={handleInputChange}
-                        />
-                        <span>{mode}</span>
-                      </label>
-                    ))}
-                  </div>
-                  {errors.participationMode && <span className="error-message">{errors.participationMode}</span>}
+                  <label className="form-label required">Department</label>
+                  <input
+                    type="text"
+                    name="department"
+                    value={formData.department}
+                    onChange={handleInputChange}
+                    className={`form-input ${errors.department ? 'error' : ''}`}
+                    placeholder="Department name"
+                  />
+                  {errors.department && <span className="error-message">{errors.department}</span>}
                 </div>
+              </div>
+
+              {/* Organization Address */}
+              <div className="form-group">
+                <label className="form-label required">Organization Address</label>
+                <textarea
+                  name="organizationAddress"
+                  value={formData.organizationAddress}
+                  onChange={handleInputChange}
+                  className={`form-textarea ${errors.organizationAddress ? 'error' : ''}`}
+                  placeholder="Street address, building, etc."
+                  rows="3"
+                />
+                {errors.organizationAddress && <span className="error-message">{errors.organizationAddress}</span>}
+              </div>
+
+              {/* City and Pincode Row */}
+              <div className="form-row">
+                <div className="form-group">
+                  <label className="form-label required">City</label>
+                  <input
+                    type="text"
+                    name="city"
+                    value={formData.city}
+                    onChange={handleInputChange}
+                    className={`form-input ${errors.city ? 'error' : ''}`}
+                    placeholder="City"
+                  />
+                  {errors.city && <span className="error-message">{errors.city}</span>}
+                </div>
+
+                <div className="form-group">
+                  <label className="form-label required">Pincode</label>
+                  <input
+                    type="text"
+                    name="pincode"
+                    value={formData.pincode}
+                    onChange={handleInputChange}
+                    className={`form-input ${errors.pincode ? 'error' : ''}`}
+                    placeholder="Pincode"
+                  />
+                  {errors.pincode && <span className="error-message">{errors.pincode}</span>}
+                </div>
+              </div>
+
+              {/* Country and Nationality Row */}
+              <div className="form-row">
+                <div className="form-group">
+                  <label className="form-label required">Country</label>
+                  <input
+                    type="text"
+                    name="country"
+                    value={formData.country}
+                    onChange={handleInputChange}
+                    className={`form-input ${errors.country ? 'error' : ''}`}
+                    placeholder="Country"
+                  />
+                  {errors.country && <span className="error-message">{errors.country}</span>}
+                </div>
+
+                <div className="form-group">
+                  <label className="form-label required">Nationality</label>
+                  <select
+                    name="nationality"
+                    value={formData.nationality}
+                    onChange={handleInputChange}
+                    className={`form-select ${errors.nationality ? 'error' : ''}`}
+                  >
+                    <option value="">Select Nationality</option>
+                    {nationalityOptions.map(option => (
+                      <option key={option} value={option}>{option}</option>
+                    ))}
+                  </select>
+                  {errors.nationality && <span className="error-message">{errors.nationality}</span>}
+                </div>
+              </div>
+
+              {/* Contact Number */}
+              <div className="form-group">
+                <label className="form-label required">Contact Number</label>
+                <input
+                  type="tel"
+                  name="contactNumber"
+                  value={formData.contactNumber}
+                  onChange={handleInputChange}
+                  className={`form-input ${errors.contactNumber ? 'error' : ''}`}
+                  placeholder="+91 98765 43210"
+                />
+                {errors.contactNumber && <span className="error-message">{errors.contactNumber}</span>}
               </div>
             </div>
 
-            {/* Section B: Author Details */}
+            {/* Section 2: Co-Author Information */}
             <div className="form-section">
               <div className="form-section-header">
                 <div className="section-icon">👥</div>
-                <h2>Author Details</h2>
+                <h2>Co-Author Information</h2>
               </div>
 
-              {formData.authors.map((author, index) => (
-                <div key={author.id} className="author-card">
-                  <div className="author-card-header">
-                    <h3>Author {index + 1}</h3>
-                    {formData.authors.length > 1 && (
-                      <button
-                        type="button"
-                        onClick={() => removeAuthor(index)}
-                        className="btn-remove-author"
-                      >
-                        Remove
-                      </button>
-                    )}
-                  </div>
-
-                  <div className="form-row">
-                    <div className="form-group">
-                      <label className="form-label required">Full Name</label>
-                      <input
-                        type="text"
-                        value={author.fullName}
-                        onChange={(e) => handleAuthorChange(index, 'fullName', e.target.value)}
-                        className={`form-input ${errors[`author_${index}_name`] ? 'error' : ''}`}
-                        placeholder="Enter full name"
-                      />
-                      {errors[`author_${index}_name`] && <span className="error-message">{errors[`author_${index}_name`]}</span>}
-                    </div>
-
-                    <div className="form-group">
-                      <label className="form-label required">Email</label>
-                      <input
-                        type="email"
-                        value={author.email}
-                        onChange={(e) => handleAuthorChange(index, 'email', e.target.value)}
-                        className={`form-input ${errors[`author_${index}_email`] ? 'error' : ''}`}
-                        placeholder="email@example.com"
-                      />
-                      {errors[`author_${index}_email`] && <span className="error-message">{errors[`author_${index}_email`]}</span>}
-                    </div>
-                  </div>
-
-                  <div className="form-row">
-                    <div className="form-group">
-                      <label className="form-label required">Mobile Number</label>
-                      <input
-                        type="tel"
-                        value={author.mobile}
-                        onChange={(e) => handleAuthorChange(index, 'mobile', e.target.value)}
-                        className={`form-input ${errors[`author_${index}_mobile`] ? 'error' : ''}`}
-                        placeholder="+91 XXXXXXXXXX"
-                      />
-                      {errors[`author_${index}_mobile`] && <span className="error-message">{errors[`author_${index}_mobile`]}</span>}
-                    </div>
-
-                    <div className="form-group">
-                      <label className="form-label required">Designation</label>
-                      <select
-                        value={author.designation}
-                        onChange={(e) => handleAuthorChange(index, 'designation', e.target.value)}
-                        className={`form-select ${errors[`author_${index}_designation`] ? 'error' : ''}`}
-                      >
-                        <option value="">Select Designation</option>
-                        {designations.map(des => (
-                          <option key={des} value={des}>{des}</option>
-                        ))}
-                      </select>
-                      {errors[`author_${index}_designation`] && <span className="error-message">{errors[`author_${index}_designation`]}</span>}
-                    </div>
-                  </div>
-
-                  <div className="form-row">
-                    <div className="form-group">
-                      <label className="form-label">Department</label>
-                      <input
-                        type="text"
-                        value={author.department}
-                        onChange={(e) => handleAuthorChange(index, 'department', e.target.value)}
-                        className="form-input"
-                        placeholder="Computer Science"
-                      />
-                    </div>
-
-                    <div className="form-group">
-                      <label className="form-label required">Institution Name</label>
-                      <input
-                        type="text"
-                        value={author.institution}
-                        onChange={(e) => handleAuthorChange(index, 'institution', e.target.value)}
-                        className={`form-input ${errors[`author_${index}_institution`] ? 'error' : ''}`}
-                        placeholder="University/College name"
-                      />
-                      {errors[`author_${index}_institution`] && <span className="error-message">{errors[`author_${index}_institution`]}</span>}
-                    </div>
-                  </div>
-
-                  <div className="form-row">
-                    <div className="form-group">
-                      <label className="form-label">City</label>
-                      <input
-                        type="text"
-                        value={author.city}
-                        onChange={(e) => handleAuthorChange(index, 'city', e.target.value)}
-                        className="form-input"
-                        placeholder="City"
-                      />
-                    </div>
-
-                    <div className="form-group">
-                      <label className="form-label">Country</label>
-                      <input
-                        type="text"
-                        value={author.country}
-                        onChange={(e) => handleAuthorChange(index, 'country', e.target.value)}
-                        className="form-input"
-                        placeholder="Country"
-                      />
-                    </div>
-                  </div>
-
+              {/* Co-author input fields */}
+              <div className="coauthor-input-group">
+                <div className="form-row">
                   <div className="form-group">
-                    <label className="form-label">ORCID ID (Optional)</label>
+                    <label className="form-label">Name(s) of Co-Author(s)</label>
                     <input
                       type="text"
-                      value={author.orcidId}
-                      onChange={(e) => handleAuthorChange(index, 'orcidId', e.target.value)}
+                      name="name"
+                      value={coAuthorInput.name}
+                      onChange={handleCoAuthorInputChange}
                       className="form-input"
-                      placeholder="0000-0000-0000-0000"
+                      placeholder="Co-author full name"
                     />
                   </div>
 
                   <div className="form-group">
-                    <label className="checkbox-label">
-                      <input
-                        type="checkbox"
-                        checked={author.isCorresponding}
-                        onChange={() => setCorrespondingAuthor(index)}
-                      />
-                      <span>Mark as Corresponding Author</span>
-                    </label>
+                    <label className="form-label">Affiliation(s) of Co-Author(s)</label>
+                    <input
+                      type="text"
+                      name="affiliation"
+                      value={coAuthorInput.affiliation}
+                      onChange={handleCoAuthorInputChange}
+                      className="form-input"
+                      placeholder="Co-author affiliation"
+                    />
                   </div>
                 </div>
-              ))}
 
-              <button type="button" onClick={addAuthor} className="btn-add-author">
-                + Add Another Author
-              </button>
+                <button 
+                  type="button" 
+                  onClick={addCoAuthor}
+                  className="btn-add-author"
+                  disabled={!coAuthorInput.name.trim() || !coAuthorInput.affiliation.trim()}
+                >
+                  + Add Co-Author
+                </button>
+              </div>
+
+              {/* Co-authors list */}
+              {formData.coAuthors.length > 0 && (
+                <div className="coauthors-list">
+                  <h3>Added Co-Authors</h3>
+                  {formData.coAuthors.map((coAuthor, index) => (
+                    <div key={index} className="coauthor-item">
+                      <div className="coauthor-details">
+                        <strong>{coAuthor.name}</strong>
+                        <span>{coAuthor.affiliation}</span>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => removeCoAuthor(index)}
+                        className="btn-remove-author"
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
 
-            {/* Section C: Upload Section */}
+            {/* Section 3: Abstract / Paper Details */}
             <div className="form-section">
               <div className="form-section-header">
-                <div className="section-icon">📎</div>
-                <h2>Document Uploads</h2>
+                <div className="section-icon">📄</div>
+                <h2>Abstract / Paper Details</h2>
               </div>
 
+              {/* Title */}
               <div className="form-group">
-                <label className="form-label required">Full Paper (PDF, Max 10MB)</label>
-                <div className="file-upload-wrapper">
-                  <input
-                    type="file"
-                    id="fullPaper"
-                    onChange={(e) => handleFileUpload(e, 'fullPaper')}
-                    accept=".pdf"
-                    className="file-input"
-                  />
-                  <label htmlFor="fullPaper" className="file-label">
-                    {formData.fullPaper ? formData.fullPaper.name : 'Choose File'}
-                  </label>
-                  {uploadProgress.fullPaper !== undefined && uploadProgress.fullPaper < 100 && (
-                    <div className="progress-bar">
-                      <div className="progress-fill" style={{ width: `${uploadProgress.fullPaper}%` }}></div>
-                    </div>
-                  )}
-                  {uploadProgress.fullPaper === 100 && (
-                    <span className="upload-success">✓ Uploaded</span>
-                  )}
-                </div>
-                {errors.fullPaper && <span className="error-message">{errors.fullPaper}</span>}
+                <label className="form-label required">Title</label>
+                <input
+                  type="text"
+                  name="title"
+                  value={formData.title}
+                  onChange={handleInputChange}
+                  className={`form-input ${errors.title ? 'error' : ''}`}
+                  placeholder="Enter paper title"
+                />
+                {errors.title && <span className="error-message">{errors.title}</span>}
               </div>
 
+              {/* Type of Submission */}
               <div className="form-group">
-                <label className="form-label">Plagiarism Report (Optional)</label>
-                <div className="file-upload-wrapper">
-                  <input
-                    type="file"
-                    id="plagiarismReport"
-                    onChange={(e) => handleFileUpload(e, 'plagiarismReport')}
-                    accept=".pdf"
-                    className="file-input"
-                  />
-                  <label htmlFor="plagiarismReport" className="file-label">
-                    {formData.plagiarismReport ? formData.plagiarismReport.name : 'Choose File'}
-                  </label>
-                  {uploadProgress.plagiarismReport !== undefined && uploadProgress.plagiarismReport < 100 && (
-                    <div className="progress-bar">
-                      <div className="progress-fill" style={{ width: `${uploadProgress.plagiarismReport}%` }}></div>
-                    </div>
-                  )}
-                  {uploadProgress.plagiarismReport === 100 && (
-                    <span className="upload-success">✓ Uploaded</span>
-                  )}
+                <label className="form-label required">Type of Submission</label>
+                <div className="radio-group">
+                  {submissionTypeOptions.map(type => (
+                    <label key={type} className="radio-label">
+                      <input
+                        type="radio"
+                        name="typeOfSubmission"
+                        value={type}
+                        checked={formData.typeOfSubmission === type}
+                        onChange={handleInputChange}
+                      />
+                      <span>{type}</span>
+                    </label>
+                  ))}
                 </div>
+                {errors.typeOfSubmission && <span className="error-message">{errors.typeOfSubmission}</span>}
               </div>
 
-              <div className="form-group">
-                <label className="form-label required">Copyright Form (PDF, Max 10MB)</label>
-                <div className="file-upload-wrapper">
-                  <input
-                    type="file"
-                    id="copyrightForm"
-                    onChange={(e) => handleFileUpload(e, 'copyrightForm')}
-                    accept=".pdf"
-                    className="file-input"
-                  />
-                  <label htmlFor="copyrightForm" className="file-label">
-                    {formData.copyrightForm ? formData.copyrightForm.name : 'Choose File'}
-                  </label>
-                  {uploadProgress.copyrightForm !== undefined && uploadProgress.copyrightForm < 100 && (
-                    <div className="progress-bar">
-                      <div className="progress-fill" style={{ width: `${uploadProgress.copyrightForm}%` }}></div>
-                    </div>
-                  )}
-                  {uploadProgress.copyrightForm === 100 && (
-                    <span className="upload-success">✓ Uploaded</span>
-                  )}
+              {/* Conditional file uploads based on submission type */}
+              {formData.typeOfSubmission === 'Abstract Only' && (
+                <div className="form-group slide-down">
+                  <label className="form-label required">Upload Abstract</label>
+                  <div className="file-upload-wrapper">
+                    <input
+                      type="file"
+                      id="abstractFile"
+                      onChange={(e) => handleFileUpload(e, 'abstractFile')}
+                      accept=".pdf,.doc,.docx"
+                      className="file-input"
+                    />
+                    <label htmlFor="abstractFile" className="file-label">
+                      {formData.abstractFile ? formData.abstractFile.name : 'Choose File (PDF/DOC)'}
+                    </label>
+                    {uploadProgress.abstractFile !== undefined && uploadProgress.abstractFile < 100 && (
+                      <div className="progress-bar">
+                        <div className="progress-fill" style={{ width: `${uploadProgress.abstractFile}%` }}></div>
+                      </div>
+                    )}
+                    {uploadProgress.abstractFile === 100 && (
+                      <span className="upload-success">✓ Uploaded</span>
+                    )}
+                  </div>
+                  {errors.abstractFile && <span className="error-message">{errors.abstractFile}</span>}
                 </div>
-                {errors.copyrightForm && <span className="error-message">{errors.copyrightForm}</span>}
-              </div>
+              )}
 
-              <div className="form-group">
-                <label className="form-label">Payment Screenshot (Optional)</label>
-                <div className="file-upload-wrapper">
-                  <input
-                    type="file"
-                    id="paymentScreenshot"
-                    onChange={(e) => handleFileUpload(e, 'paymentScreenshot')}
-                    accept=".pdf,.jpg,.jpeg,.png"
-                    className="file-input"
-                  />
-                  <label htmlFor="paymentScreenshot" className="file-label">
-                    {formData.paymentScreenshot ? formData.paymentScreenshot.name : 'Choose File'}
-                  </label>
-                  {uploadProgress.paymentScreenshot !== undefined && uploadProgress.paymentScreenshot < 100 && (
-                    <div className="progress-bar">
-                      <div className="progress-fill" style={{ width: `${uploadProgress.paymentScreenshot}%` }}></div>
-                    </div>
-                  )}
-                  {uploadProgress.paymentScreenshot === 100 && (
-                    <span className="upload-success">✓ Uploaded</span>
-                  )}
+              {formData.typeOfSubmission === 'Full Paper' && (
+                <div className="form-group slide-down">
+                  <label className="form-label required">Upload Full Paper</label>
+                  <div className="file-upload-wrapper">
+                    <input
+                      type="file"
+                      id="fullPaperFile"
+                      onChange={(e) => handleFileUpload(e, 'fullPaperFile')}
+                      accept=".pdf,.doc,.docx"
+                      className="file-input"
+                    />
+                    <label htmlFor="fullPaperFile" className="file-label">
+                      {formData.fullPaperFile ? formData.fullPaperFile.name : 'Choose File (PDF/DOC)'}
+                    </label>
+                    {uploadProgress.fullPaperFile !== undefined && uploadProgress.fullPaperFile < 100 && (
+                      <div className="progress-bar">
+                        <div className="progress-fill" style={{ width: `${uploadProgress.fullPaperFile}%` }}></div>
+                      </div>
+                    )}
+                    {uploadProgress.fullPaperFile === 100 && (
+                      <span className="upload-success">✓ Uploaded</span>
+                    )}
+                  </div>
+                  {errors.fullPaperFile && <span className="error-message">{errors.fullPaperFile}</span>}
                 </div>
-              </div>
+              )}
             </div>
 
-            {/* Section D: Declarations */}
+            {/* Section 4: Declaration */}
             <div className="form-section">
               <div className="form-section-header">
                 <div className="section-icon">✓</div>
                 <h2>Declaration</h2>
               </div>
 
-              <div className="declarations-group">
-                <label className="checkbox-label declaration">
+              <div className="declaration-group">
+                <label className="checkbox-label">
                   <input
                     type="checkbox"
-                    checked={formData.declarations.original}
-                    onChange={() => handleDeclarationChange('original')}
+                    checked={formData.declaration}
+                    onChange={(e) => setFormData(prev => ({ ...prev, declaration: e.target.checked }))}
                   />
-                  <span>I declare that this paper is my original work and has not been plagiarized from any source.</span>
+                  <span>The submitted work is original and not published elsewhere.</span>
                 </label>
-
-                <label className="checkbox-label declaration">
-                  <input
-                    type="checkbox"
-                    checked={formData.declarations.notSubmitted}
-                    onChange={() => handleDeclarationChange('notSubmitted')}
-                  />
-                  <span>This paper has not been submitted elsewhere for publication and is not under consideration by any other conference or journal.</span>
-                </label>
-
-                <label className="checkbox-label declaration">
-                  <input
-                    type="checkbox"
-                    checked={formData.declarations.agreeTerms}
-                    onChange={() => handleDeclarationChange('agreeTerms')}
-                  />
-                  <span>I agree to the conference terms and conditions, and I understand that accepted papers will be published in the conference proceedings.</span>
-                </label>
+                {errors.declaration && <span className="error-message">{errors.declaration}</span>}
               </div>
-              {errors.declaration && <span className="error-message">{errors.declaration}</span>}
             </div>
 
             {/* Submit Button */}
@@ -732,7 +602,6 @@ const SubmitPaper = () => {
               <button
                 type="submit"
                 className="btn-submit"
-                disabled={!isFormValid}
               >
                 Submit Research Paper
               </button>
