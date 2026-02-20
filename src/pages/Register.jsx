@@ -518,7 +518,119 @@ const Register = () => {
     'Utkal University',
     'Uttar Pradesh University of Medical Sciences',
     'Uttar Pradesh Textile Technology Institute',
+    'Indian Institute of Technology Kanpur (IIT Kanpur)',
+    'Indian Institute of Technology (BHU) Varanasi',
+    'Motilal Nehru National Institute of Technology (MNNIT) Allahabad',
+    'Indian Institute of Information Technology (IIIT) Allahabad',
+    'Rajiv Gandhi Institute of Petroleum Technology (RGIPT) Amethi',
+    'Amity University, Noida',
+    'Aligarh Muslim University (AMU)',
+    'Galgotias University, Greater Noida',
+    'Sharda University, Greater Noida',
+    'Jaypee Institute of Information Technology (JIIT) Noida',
+    'AKG Engineering College, Ghaziabad',
+    'Institute of Engineering and Technology (IET), Lucknow',
+    'PSIT (Pranveer Singh Institute of Technology), Kanpur',
+    'Accurate Institute of Management and Technology, Greater Noida',
+    'ABES Engineering College, Ghaziabad',
+    'ACN College of Engineering & Management Studies, Aligarh',
+    'GLA University, Mathura',
+    'Zakir Hussain College of Engineering & Technology, Aligarh',
+    'Hindustan College of Science & Technology, Agra',
+    'BSA College of Engineering & Technology, Agra',
+    'IET Khandari, Agra',
+    'RBS College, Agra',
+    'Raja Balwant Singh College, Agra',
+    'Babu Mohan Lal Arya Smarak Engineering College, Agra',
+    'Madan Mohan Malaviya Engineering College, Gorakhpur',
+    'Institute of Technology & Management, Gorakhpur',
+    'Mahatma Gandhi Mission’s College of Engineering & Technology',
+    'Skyline Institute of Engineering & Technology',
+    'Dronacharya College of Engineering',
+    'Jaypee Institute of Technology, Noida',
+    'United College of Engineering & Research, Allahabad',
+    'Ewing Christian College Institute of Technology & Management',
+    'IERT (Institute of Engineering & Rural Technology), Allahabad',
+    'Shambhunath Institute of Engineering & Technology (SIET), Allahabad',
+    'Mahamaya College of Agricultural Engineering & Technology, Ambedkarnagar',
+    'Sir Chhotu Ram Institute of Engineering & Technology, Meerut',
+    'Buddha Institute of Technology, Gorakhpur',
+    'College of Dairy Technology Engineering, Etawah',
+    'Harcourt Butler Technical University, Kanpur',
+    'Madan Mohan Malaviya University of Technology, Gorakhpur',
+    'IIMT College of Engineering, Greater Noida (common institute)',
+    'IEC College of Engineering & Technology (common institute)',
+    'Krishna Institute of Engineering & Technology, Ghaziabad (common)',
+    'Sunderdeep Engineering College, Ghaziabad (common)',
+    'Ajay Kumar Garg Engineering College, Ghaziabad',
+    'BBD University College of Engineering (common)',
+    'Galgotias College of Engineering & Technology',
+    'Greater Noida Institute of Technology (common)',
+    'Noida Institute of Engineering & Technology (common)',
+    'JSS Academy of Technical Education, Noida',
+    'IIIT Lucknow – Indian Institute of Information Technology, Lucknow',
+    'Aksh Institute of Engineering & Technology (common)',
+    'Babu Banarasi Das University, Lucknow (with engineering faculty)',
+    'Bennett University, Greater Noida (with engineering faculty)',
+    'Shobhit University, Meerut (with engineering faculty)',
+    'Maharishi University of Information Technology, Noida (engineering)',
+    'Lucknow College of Engineering & Technology (common)',
+    'Institute of Engineering & Technology, Dr BR Ambedkar University Agra',
+    'Hindustan Institute of Technology & Management (common)',
+    'Meerut Institute of Engineering & Technology (common)',
+    'IILM Academy of Higher Learning (common)',
+    'Delhi Technical Campus, Greater Noida (common)',
+    'Seth GS Institute of Technology (common)',
+    'Kanpur Institute of Technology (common)',
+    'MMM Engineering College (common)',
+    'ITS Engineering College, Greater Noida (common)',
+    'Shiv Nadar University (engineering programmes)',
+    'Raj Kumar Goel Institute of Technology (common)',
+    'Fortune Institute of Technology (common)',
+    'IEC College of Engineering, Lucknow (common)',
+    'S.R. Group of Institutions (common)',
+    'Dev Bhoomi Group of Institutions (engineering)',
+    'Methodist College of Engineering Technology (common)',
+    'Northern India Engineering College (common)',
+    'Siddhartha Engineering College (common)',
+    'Invertis University (engineering) (common)',
+    'Amity School of Engineering & Technology (Noida)',
+    'Lotus Institute of Technology (common)',
+    'Apex Institute of Technology (common)',
+    'Surendra Institute of Engineering & Management (common)',
+    'Global Institute of Technology (common)',
+    'IPEC Engineering College (common)',
+    'Dr. Ambedkar Institute of Technology (common)',
+    'United Technical Campus (common)',
+    'Dev Institute of Engineering & Technology (common)',
+    'Yadu Institute of Technology (common)',
+    'Dr. APJ Abdul Kalam Technical University Campus Colleges (multiple)',
+    'RKGIT Ghaziabad (common)',
+    'BITS College of Engineering (common)',
+    'Lovely Professional University Campus (with engineering)',
+    'Brij University (engineering) (common)',
+    'Maharana Pratap Group of Colleges (common)',
+    'RKGIT Lucknow (common)',
+    'IEC University Engineering Streams (common)',
+    'Anand Engineering College (common)',
+    'RML Avadh University IET (common)',
+    'Faizabad College of Engineering (common)',
+    'IET, MJPRU Bareilly (common)',
+    'Rohilkhand Institute of Engineering & Technology (common)',
+    'United Technical Campus (common)',
+    'Axis Colleges',
+    'Axis Institute of Technology and Management',
+    'Axis Institute of Technology and Management (AITM)',
+    'Axis Institute of Technology',
+    'Axis Institute of Architecture',
+    'Axis Institute of Architecture (AIA)',
+    'Axis Institute of Fashion Technology',
+    'Axis Institute of Fashion Technology (AIFT)',
+    'Axis Institute of Higher Education',
+    'Axis Institute of Higher Education (AIHE)',
   ];
+
+  const uniqueIndianTechColleges = [...new Set(indianTechColleges)];
 
   const [formData, setFormData] = useState({
     // Basic Information
@@ -530,6 +642,7 @@ const Register = () => {
     age: '',
     gender: '',
     nationality: '',
+    country: '',
     department: '',
     designation: '',
     categoryOfParticipation: '',
@@ -554,6 +667,31 @@ const Register = () => {
   const salutationOptions = ['Mr.', 'Ms.', 'Dr.', 'Prof.'];
   
   const genderOptions = ['Male', 'Female', 'Other', 'Prefer not to say'];
+
+  const countryOptions = [
+    'Afghanistan', 'Albania', 'Algeria', 'Andorra', 'Angola', 'Antigua and Barbuda', 'Argentina', 'Armenia', 'Australia',
+    'Austria', 'Azerbaijan', 'Bahamas', 'Bahrain', 'Bangladesh', 'Barbados', 'Belarus', 'Belgium', 'Belize', 'Benin',
+    'Bhutan', 'Bolivia', 'Bosnia and Herzegovina', 'Botswana', 'Brazil', 'Brunei', 'Bulgaria', 'Burkina Faso', 'Burundi',
+    'Cabo Verde', 'Cambodia', 'Cameroon', 'Canada', 'Central African Republic', 'Chad', 'Chile', 'China', 'Colombia',
+    'Comoros', 'Congo', 'Costa Rica', 'Croatia', 'Cuba', 'Cyprus', 'Czechia', 'Democratic Republic of the Congo',
+    'Denmark', 'Djibouti', 'Dominica', 'Dominican Republic', 'Ecuador', 'Egypt', 'El Salvador', 'Equatorial Guinea',
+    'Eritrea', 'Estonia', 'Eswatini', 'Ethiopia', 'Fiji', 'Finland', 'France', 'Gabon', 'Gambia', 'Georgia', 'Germany',
+    'Ghana', 'Greece', 'Grenada', 'Guatemala', 'Guinea', 'Guinea-Bissau', 'Guyana', 'Haiti', 'Honduras', 'Hungary',
+    'Iceland', 'India', 'Indonesia', 'Iran', 'Iraq', 'Ireland', 'Israel', 'Italy', 'Jamaica', 'Japan', 'Jordan',
+    'Kazakhstan', 'Kenya', 'Kiribati', 'Kuwait', 'Kyrgyzstan', 'Laos', 'Latvia', 'Lebanon', 'Lesotho', 'Liberia',
+    'Libya', 'Liechtenstein', 'Lithuania', 'Luxembourg', 'Madagascar', 'Malawi', 'Malaysia', 'Maldives', 'Mali', 'Malta',
+    'Marshall Islands', 'Mauritania', 'Mauritius', 'Mexico', 'Micronesia', 'Moldova', 'Monaco', 'Mongolia', 'Montenegro',
+    'Morocco', 'Mozambique', 'Myanmar', 'Namibia', 'Nauru', 'Nepal', 'Netherlands', 'New Zealand', 'Nicaragua', 'Niger',
+    'Nigeria', 'North Korea', 'North Macedonia', 'Norway', 'Oman', 'Pakistan', 'Palau', 'Palestine', 'Panama',
+    'Papua New Guinea', 'Paraguay', 'Peru', 'Philippines', 'Poland', 'Portugal', 'Qatar', 'Romania', 'Russia', 'Rwanda',
+    'Saint Kitts and Nevis', 'Saint Lucia', 'Saint Vincent and the Grenadines', 'Samoa', 'San Marino',
+    'Sao Tome and Principe', 'Saudi Arabia', 'Senegal', 'Serbia', 'Seychelles', 'Sierra Leone', 'Singapore', 'Slovakia',
+    'Slovenia', 'Solomon Islands', 'Somalia', 'South Africa', 'South Korea', 'South Sudan', 'Spain', 'Sri Lanka',
+    'Sudan', 'Suriname', 'Sweden', 'Switzerland', 'Syria', 'Tajikistan', 'Tanzania', 'Thailand', 'Timor-Leste', 'Togo',
+    'Tonga', 'Trinidad and Tobago', 'Tunisia', 'Turkey', 'Turkmenistan', 'Tuvalu', 'Uganda', 'Ukraine',
+    'United Arab Emirates', 'United Kingdom', 'United States', 'Uruguay', 'Uzbekistan', 'Vanuatu', 'Vatican City',
+    'Venezuela', 'Vietnam', 'Yemen', 'Zambia', 'Zimbabwe'
+  ];
   
   const designationOptions = [
     'UG Student',
@@ -584,7 +722,7 @@ const Register = () => {
         setInstituteSuggestions([]);
         setShowInstituteSuggestions(false);
       } else {
-        const filtered = indianTechColleges.filter(college =>
+        const filtered = uniqueIndianTechColleges.filter(college =>
           college.toLowerCase().includes(value.toLowerCase())
         );
         setInstituteSuggestions(filtered.slice(0, 8)); // Show max 8 suggestions
@@ -634,6 +772,7 @@ const Register = () => {
     
     if (!formData.gender) newErrors.gender = 'Please select gender';
     if (!formData.nationality.trim()) newErrors.nationality = 'Nationality is required';
+    if (!formData.country.trim()) newErrors.country = 'Country is required';
     if (!formData.department.trim()) newErrors.department = 'Department is required';
     if (!formData.designation) newErrors.designation = 'Please select designation';
     if (!formData.categoryOfParticipation) newErrors.categoryOfParticipation = 'Please select category of participation';
@@ -916,6 +1055,24 @@ const Register = () => {
                   />
                   {errors.department && <span className="error-message">{errors.department}</span>}
                 </div>
+              </div>
+
+              {/* Country */}
+              <div className="form-group">
+                <label htmlFor="country">Country *</label>
+                <select
+                  id="country"
+                  name="country"
+                  value={formData.country}
+                  onChange={handleChange}
+                  className={errors.country ? 'error' : ''}
+                >
+                  <option value="">Select Country</option>
+                  {countryOptions.map(option => (
+                    <option key={option} value={option}>{option}</option>
+                  ))}
+                </select>
+                {errors.country && <span className="error-message">{errors.country}</span>}
               </div>
 
               {/* Designation */}
