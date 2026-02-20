@@ -67,7 +67,7 @@ export default function About() {
       <section className="about-hero">
         <div className="about-hero__content">
           <span className="about-hero__eyebrow">About AITM</span>
-          <h1 className="about-hero__title" style={{fontSize:"clamp(3rem, 6vw, 4.5rem)"}}>
+          <h1 className="about-hero__title">
             Axis Institute of Technology and Management
           </h1>
           <p className="about-hero__description">

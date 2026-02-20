@@ -580,6 +580,8 @@
   align-items: center;
   position: relative;
   overflow: hidden;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
 .committee-cta__card::before {
@@ -608,12 +610,20 @@
   font-size: 1.1rem;
   margin-bottom: 30px;
   line-height: 1.7;
+  overflow-wrap: anywhere;
 }
 
 .committee-cta__actions {
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
+  align-items: center;
+}
+
+.committee-cta__actions .btn {
+  white-space: normal;
+  text-align: center;
+  line-height: 1.3;
 }
 
 .btn-icon {
@@ -710,6 +720,7 @@
     grid-template-columns: 1fr;
     text-align: center;
     gap: 30px;
+    padding: 38px 28px;
   }
 
   .committee-cta__actions {
@@ -773,10 +784,30 @@
 
   .committee-cta__actions {
     flex-direction: column;
+    align-items: center;
+    width: 100%;
   }
 
   .committee-cta__actions .btn {
-    width: 100%;
+    width: min(100%, 320px);
+    padding: 11px 16px;
+  }
+
+  .committee-cta__card {
+    padding: 26px 18px;
+    gap: 20px;
+    border-radius: var(--radius-md);
+  }
+
+  .committee-cta__content h2 {
+    font-size: clamp(1.5rem, 6.5vw, 2rem);
+    line-height: 1.15;
+  }
+
+  .committee-cta__content p {
+    font-size: clamp(0.95rem, 3.8vw, 1.05rem);
+    line-height: 1.6;
+    margin-bottom: 22px;
   }
 
   .guidelines-grid {
@@ -822,6 +853,12 @@
   .committee-card__institution,
   .committee-card__expertise {
     font-size: 0.85rem;
+  }
+
+  .committee-cta__actions .btn {
+    width: min(100%, 280px);
+    font-size: 0.9rem;
+    padding: 10px 14px;
   }
 }
 

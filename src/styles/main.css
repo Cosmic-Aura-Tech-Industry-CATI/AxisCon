@@ -596,6 +596,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .hero h1 {
   font-size: clamp(2rem, 5vw, 4rem);
+  line-height: 1.12;
 }
 
 .hero h1 span {
@@ -620,6 +621,7 @@ h1, h2, h3, h4, h5, h6 {
   gap: var(--spacing-sm);
   flex-wrap: wrap;
   margin-top: var(--spacing-md);
+  justify-content: flex-start;
 }
 
 .hero__panel {
@@ -1394,12 +1396,12 @@ h1, h2, h3, h4, h5, h6 {
 
   .hero__actions {
     flex-direction: column;
-    align-items: stretch;
+    align-items: center;
     width: 100%;
   }
 
   .hero__actions .btn {
-    width: 100%;
+    width: min(100%, 320px);
   }
 
   .hero__panel {
@@ -1578,14 +1580,15 @@ h1, h2, h3, h4, h5, h6 {
   .nav__link,
   .nav__link--research-paper,
   .nav__register-button-mobile {
-    width: min(260px, 92vw);
-    font-size: 0.9rem;
-    padding: 12px 16px;
+    width: min(248px, 88vw);
+    font-size: 0.88rem;
+    padding: 10px 14px;
+    border-radius: 14px;
   }
 
   .nav__menu-logo img {
-    width: 70px;
-    height: 70px;
+    width: 58px;
+    height: 58px;
   }
 
   .section {
@@ -1622,7 +1625,17 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .nav__links {
-    padding: var(--spacing-2xl) var(--spacing-xs) var(--spacing-md);
+    padding: var(--spacing-xl) var(--spacing-xs) var(--spacing-sm);
+    gap: 10px;
+  }
+
+  .nav__links-center,
+  .nav__link-dropdown {
+    gap: 10px;
+  }
+
+  .nav__menu-logo {
+    margin-bottom: var(--spacing-sm);
   }
 
   .conference-hero {
@@ -1651,6 +1664,24 @@ h1, h2, h3, h4, h5, h6 {
   .nav__brand img {
     width: 48px;
     height: 48px;
+  }
+
+  .nav__links {
+    padding-top: var(--spacing-lg);
+    gap: 8px;
+  }
+
+  .nav__link,
+  .nav__link--research-paper,
+  .nav__register-button-mobile {
+    width: min(232px, 86vw);
+    font-size: 0.84rem;
+    padding: 9px 12px;
+  }
+
+  .nav__menu-logo img {
+    width: 52px;
+    height: 52px;
   }
 
   .hero h1 {
