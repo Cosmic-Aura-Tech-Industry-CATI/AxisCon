@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Seo from "../components/Seo";
 import './SubmitPaper.css';
 
@@ -39,9 +39,10 @@ const SubmitPaper = () => {
     name: '',
     affiliation: ''
   });
-  
-  const [uploadProgress, setUploadProgress] = useState({});
+  const [coAuthorError, setCoAuthorError] = useState('');
+  const [isDraggingFile, setIsDraggingFile] = useState(false);
   const [errors, setErrors] = useState({});
+  const submissionFileInputRef = useRef(null);
 
   const salutationOptions = ['Mr.', 'Ms.', 'Dr.', 'Prof.'];
   const designationOptions = [
@@ -59,6 +60,28 @@ const SubmitPaper = () => {
   // Handle input changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    if (name === 'typeOfSubmission') {
+      setFormData(prev => ({
+        ...prev,
+        typeOfSubmission: value,
+        abstractFile:
+          value === 'Abstract Only'
+            ? (prev.abstractFile || prev.fullPaperFile || null)
+            : prev.abstractFile,
+        fullPaperFile:
+          value === 'Full Paper'
+            ? (prev.fullPaperFile || prev.abstractFile || null)
+            : prev.fullPaperFile
+      }));
+      setErrors(prev => ({
+        ...prev,
+        typeOfSubmission: '',
+        abstractFile: '',
+        fullPaperFile: ''
+      }));
+      return;
+    }
+
     setFormData(prev => ({ ...prev, [name]: value }));
     if (errors[name]) {
       setErrors(prev => ({ ...prev, [name]: '' }));
@@ -69,16 +92,44 @@ const SubmitPaper = () => {
   const handleCoAuthorInputChange = (e) => {
     const { name, value } = e.target;
     setCoAuthorInput(prev => ({ ...prev, [name]: value }));
+    if (coAuthorError) {
+      setCoAuthorError('');
+    }
   };
 
   // Add co-author
   const addCoAuthor = () => {
-    if (coAuthorInput.name.trim() && coAuthorInput.affiliation.trim()) {
-      setFormData(prev => ({
-        ...prev,
-        coAuthors: [...prev.coAuthors, { ...coAuthorInput }]
-      }));
-      setCoAuthorInput({ name: '', affiliation: '' });
+    const trimmedName = coAuthorInput.name.trim();
+    const trimmedAffiliation = coAuthorInput.affiliation.trim();
+
+    if (!trimmedName || !trimmedAffiliation) {
+      setCoAuthorError('Please enter both co-author name and affiliation.');
+      return;
+    }
+
+    const duplicateExists = formData.coAuthors.some(
+      (author) =>
+        author.name.toLowerCase() === trimmedName.toLowerCase() &&
+        author.affiliation.toLowerCase() === trimmedAffiliation.toLowerCase()
+    );
+
+    if (duplicateExists) {
+      setCoAuthorError('This co-author is already added.');
+      return;
+    }
+
+    setFormData(prev => ({
+      ...prev,
+      coAuthors: [...prev.coAuthors, { name: trimmedName, affiliation: trimmedAffiliation }]
+    }));
+    setCoAuthorInput({ name: '', affiliation: '' });
+    setCoAuthorError('');
+  };
+
+  const handleCoAuthorKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      addCoAuthor();
     }
   };
 
@@ -91,8 +142,7 @@ const SubmitPaper = () => {
   };
 
   // Handle file upload
-  const handleFileUpload = (e, fieldName) => {
-    const file = e.target.files[0];
+  const processFileUpload = (file, fieldName) => {
     if (!file) return;
 
     // File type validation
@@ -101,7 +151,12 @@ const SubmitPaper = () => {
       fullPaperFile: ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document']
     };
 
-    if (!allowedTypes[fieldName].includes(file.type)) {
+    const fileName = file.name?.toLowerCase() || '';
+    const allowedExtensions = ['.pdf', '.doc', '.docx'];
+    const hasAllowedMime = allowedTypes[fieldName].includes(file.type);
+    const hasAllowedExtension = allowedExtensions.some((extension) => fileName.endsWith(extension));
+
+    if (!hasAllowedMime && !hasAllowedExtension) {
       setErrors(prev => ({
         ...prev,
         [fieldName]: 'Invalid file type. Please upload PDF or Word document only.'
@@ -119,21 +174,58 @@ const SubmitPaper = () => {
       return;
     }
 
-    // Simulate upload progress
-    setUploadProgress(prev => ({ ...prev, [fieldName]: 0 }));
-    const interval = setInterval(() => {
-      setUploadProgress(prev => {
-        const currentProgress = prev[fieldName] || 0;
-        if (currentProgress >= 100) {
-          clearInterval(interval);
-          return { ...prev, [fieldName]: 100 };
-        }
-        return { ...prev, [fieldName]: currentProgress + 10 };
-      });
-    }, 100);
-
     setFormData(prev => ({ ...prev, [fieldName]: file }));
     setErrors(prev => ({ ...prev, [fieldName]: '' }));
+  };
+
+  const handleFileUpload = (e, fieldName) => {
+    const file = e.target.files[0];
+    processFileUpload(file, fieldName);
+    e.target.value = '';
+  };
+
+  const getActiveFileField = () => {
+    if (formData.typeOfSubmission === 'Abstract Only') return 'abstractFile';
+    if (formData.typeOfSubmission === 'Full Paper') return 'fullPaperFile';
+    return null;
+  };
+
+  const handleFileDragOver = (e) => {
+    e.preventDefault();
+    if (getActiveFileField()) {
+      setIsDraggingFile(true);
+    }
+  };
+
+  const handleFileDragLeave = (e) => {
+    e.preventDefault();
+    setIsDraggingFile(false);
+  };
+
+  const handleFileDrop = (e) => {
+    e.preventDefault();
+    setIsDraggingFile(false);
+
+    const fieldName = getActiveFileField() || 'abstractFile';
+
+    const file = e.dataTransfer.files?.[0];
+    processFileUpload(file, fieldName);
+  };
+
+  const removeUploadedFile = () => {
+    const fieldName = getActiveFileField();
+    if (!fieldName) {
+      setFormData(prev => ({ ...prev, abstractFile: null, fullPaperFile: null }));
+      setErrors(prev => ({ ...prev, abstractFile: '', fullPaperFile: '' }));
+      return;
+    }
+
+    setFormData(prev => ({ ...prev, [fieldName]: null }));
+    setErrors(prev => ({ ...prev, [fieldName]: '' }));
+  };
+
+  const handleDropZoneClick = () => {
+    submissionFileInputRef.current?.click();
   };
 
   // Form validation
@@ -429,6 +521,7 @@ const SubmitPaper = () => {
                       name="name"
                       value={coAuthorInput.name}
                       onChange={handleCoAuthorInputChange}
+                      onKeyDown={handleCoAuthorKeyDown}
                       className="form-input"
                       placeholder="Co-author full name"
                     />
@@ -441,6 +534,7 @@ const SubmitPaper = () => {
                       name="affiliation"
                       value={coAuthorInput.affiliation}
                       onChange={handleCoAuthorInputChange}
+                      onKeyDown={handleCoAuthorKeyDown}
                       className="form-input"
                       placeholder="Co-author affiliation"
                     />
@@ -455,10 +549,12 @@ const SubmitPaper = () => {
                 >
                   + Add Co-Author
                 </button>
+
+                {coAuthorError && <span className="error-message">{coAuthorError}</span>}
               </div>
 
               {/* Co-authors list */}
-              {formData.coAuthors.length > 0 && (
+              {formData.coAuthors.length > 0 ? (
                 <div className="coauthors-list">
                   <h3>Added Co-Authors</h3>
                   {formData.coAuthors.map((coAuthor, index) => (
@@ -477,6 +573,8 @@ const SubmitPaper = () => {
                     </div>
                   ))}
                 </div>
+              ) : (
+                <p className="coauthors-empty">No co-authors added yet.</p>
               )}
             </div>
 
@@ -504,77 +602,80 @@ const SubmitPaper = () => {
               {/* Type of Submission */}
               <div className="form-group">
                 <label className="form-label required">Type of Submission</label>
-                <div className="radio-group">
+                <select
+                  name="typeOfSubmission"
+                  value={formData.typeOfSubmission}
+                  onChange={handleInputChange}
+                  className={`form-select ${errors.typeOfSubmission ? 'error' : ''}`}
+                >
+                  <option value="">Select Type of Submission</option>
                   {submissionTypeOptions.map(type => (
-                    <label key={type} className="radio-label">
-                      <input
-                        type="radio"
-                        name="typeOfSubmission"
-                        value={type}
-                        checked={formData.typeOfSubmission === type}
-                        onChange={handleInputChange}
-                      />
-                      <span>{type}</span>
-                    </label>
+                    <option key={type} value={type}>{type}</option>
                   ))}
-                </div>
+                </select>
                 {errors.typeOfSubmission && <span className="error-message">{errors.typeOfSubmission}</span>}
               </div>
 
-              {/* Conditional file uploads based on submission type */}
-              {formData.typeOfSubmission === 'Abstract Only' && (
-                <div className="form-group slide-down">
-                  <label className="form-label required">Upload Abstract</label>
-                  <div className="file-upload-wrapper">
-                    <input
-                      type="file"
-                      id="abstractFile"
-                      onChange={(e) => handleFileUpload(e, 'abstractFile')}
-                      accept=".pdf,.doc,.docx"
-                      className="file-input"
-                    />
-                    <label htmlFor="abstractFile" className="file-label">
-                      {formData.abstractFile ? formData.abstractFile.name : 'Choose File (PDF/DOC)'}
-                    </label>
-                    {uploadProgress.abstractFile !== undefined && uploadProgress.abstractFile < 100 && (
-                      <div className="progress-bar">
-                        <div className="progress-fill" style={{ width: `${uploadProgress.abstractFile}%` }}></div>
-                      </div>
-                    )}
-                    {uploadProgress.abstractFile === 100 && (
-                      <span className="upload-success">✓ Uploaded</span>
-                    )}
-                  </div>
-                  {errors.abstractFile && <span className="error-message">{errors.abstractFile}</span>}
-                </div>
-              )}
+              {/* Submission File Drop Section */}
+              {(() => {
+                const activeFileField = getActiveFileField();
+                const activeFile = activeFileField
+                  ? formData[activeFileField]
+                  : (formData.abstractFile || formData.fullPaperFile);
+                const activeFileError = activeFileField ? errors[activeFileField] : '';
+                const uploadLabel = formData.typeOfSubmission === 'Abstract Only' ? 'Upload Abstract File' : 'Upload Full Paper File';
 
-              {formData.typeOfSubmission === 'Full Paper' && (
-                <div className="form-group slide-down">
-                  <label className="form-label required">Upload Full Paper</label>
-                  <div className="file-upload-wrapper">
-                    <input
-                      type="file"
-                      id="fullPaperFile"
-                      onChange={(e) => handleFileUpload(e, 'fullPaperFile')}
-                      accept=".pdf,.doc,.docx"
-                      className="file-input"
-                    />
-                    <label htmlFor="fullPaperFile" className="file-label">
-                      {formData.fullPaperFile ? formData.fullPaperFile.name : 'Choose File (PDF/DOC)'}
+                return (
+                  <div className="form-group slide-down">
+                    <label className="form-label required">
+                      {formData.typeOfSubmission ? uploadLabel : 'Upload Submission File'}
                     </label>
-                    {uploadProgress.fullPaperFile !== undefined && uploadProgress.fullPaperFile < 100 && (
-                      <div className="progress-bar">
-                        <div className="progress-fill" style={{ width: `${uploadProgress.fullPaperFile}%` }}></div>
+
+                    {!activeFile ? (
+                      <div
+                        className={`file-drop-zone ${isDraggingFile ? 'dragging' : ''}`}
+                        onDragOver={handleFileDragOver}
+                        onDragLeave={handleFileDragLeave}
+                        onDrop={handleFileDrop}
+                        onClick={handleDropZoneClick}
+                      >
+                        <input
+                          type="file"
+                          id="submissionFile"
+                          ref={submissionFileInputRef}
+                          onChange={(e) => handleFileUpload(e, activeFileField || 'abstractFile')}
+                          accept=".pdf,.doc,.docx"
+                          className="file-input"
+                        />
+                        <div className="file-drop-content" role="button" tabIndex={0}>
+                          <span className="file-drop-icon">📄</span>
+                          <strong>Drop file here or click to browse</strong>
+                          <small>Accepted formats: PDF, DOC, DOCX (Max 10MB)</small>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="selected-file-card">
+                        <div className="selected-file-info">
+                          <span className="selected-file-icon">📎</span>
+                          <div>
+                            <strong>{activeFile.name}</strong>
+                            <small>{(activeFile.size / 1024 / 1024).toFixed(2)} MB</small>
+                          </div>
+                        </div>
+                        <button
+                          type="button"
+                          className="btn-remove-file"
+                          onClick={removeUploadedFile}
+                        >
+                          Remove File
+                        </button>
                       </div>
                     )}
-                    {uploadProgress.fullPaperFile === 100 && (
-                      <span className="upload-success">✓ Uploaded</span>
-                    )}
+
+                    {activeFileError && <span className="error-message">{activeFileError}</span>}
                   </div>
-                  {errors.fullPaperFile && <span className="error-message">{errors.fullPaperFile}</span>}
-                </div>
-              )}
+                );
+              })()}
             </div>
 
             {/* Section 4: Declaration */}
