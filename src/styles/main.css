@@ -1926,6 +1926,28 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0;
 }
 
+.kalesh-copyright {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.kalesh-copyright__link {
+  color: var(--primary-blue);
+  text-decoration: none;
+}
+
+.kalesh-copyright__link:hover {
+  color: var(--primary-blue-light);
+  text-decoration: underline;
+}
+
+.kalesh-copyright__logo {
+  display: inline-block;
+  vertical-align: middle;
+}
+
 .footer__scroll-top {
   display: flex;
   align-items: center;

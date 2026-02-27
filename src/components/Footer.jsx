@@ -116,6 +116,25 @@ export default function Footer() {
       <div className="footer__bottom">
         <p className="footer__copy">
           Copyright © 2026 ICCIST. All rights reserved.
+          <br />
+          <span className="kalesh-copyright">
+            Developed by Team {" "}
+            <a
+              href="https://www.thekalesh.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="kalesh-copyright__link"
+            >
+              Kalesh
+            </a>
+            <img
+              className="kalesh-copyright__logo"
+              src="../../logo.png"
+              alt="Kalesh Logo"
+              width="20px"
+              height="20px"
+            />
+          </span>
         </p>
         <button
           className="footer__scroll-top"
