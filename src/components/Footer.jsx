@@ -106,9 +106,14 @@ export default function Footer() {
               </a>
             ))}
           </div>
-          <Link to="/register" className="footer__register-btn">
+          <a
+            href="https://forms.gle/HBuUc1SGSomUrGra6"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="footer__register-btn"
+          >
             Register Now
-          </Link>
+          </a>
         </div>
       </div>
 

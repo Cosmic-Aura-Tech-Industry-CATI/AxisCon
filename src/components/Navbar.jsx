@@ -99,9 +99,15 @@ export default function Navbar() {
                     <a href="/Sample_IEEE_Conference_Paper_Format.pdf" download="Sample_IEEE_Conference_Paper_Format.pdf" className="nav__dropdown-item" onClick={closeMenu}>
                       Download Research Paper Format
                     </a>
-                    <Link to="/submit-paper" className="nav__dropdown-item" onClick={closeMenu}>
+                    <a
+                      href="https://forms.gle/Xr1DqvWEEAjU6Ts59"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="nav__dropdown-item"
+                      onClick={closeMenu}
+                    >
                       Submit Research Paper
-                    </Link>
+                    </a>
                   </div>
                 </div>
               ) : (
@@ -117,25 +123,29 @@ export default function Navbar() {
             ))}
             
             {/* Register Button - Inside Mobile Menu */}
-            <Link
-              to="/register"
-              className={`nav__link nav__register-button-mobile ${location.pathname === "/register" ? "active" : ""}`}
+            <a
+              href="https://forms.gle/HBuUc1SGSomUrGra6"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="nav__link nav__register-button-mobile"
               onClick={closeMenu}
             >
               <span className="nav__register-text">Register Now</span>
-            </Link>
+            </a>
           </div>
         </div>
 
         {/* Register Button - Desktop Only */}
         <div className="nav__register-wrapper">
-          <Link
-            to="/register"
+          <a
+            href="https://forms.gle/HBuUc1SGSomUrGra6"
+            target="_blank"
+            rel="noopener noreferrer"
             className="nav__register-button"
             onClick={closeMenu}
           >
             <span className="nav__register-text">Register Now</span>
-          </Link>
+          </a>
         </div>
       </div>
     </nav>
